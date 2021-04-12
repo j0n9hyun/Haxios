@@ -3,10 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "dev": "concurrently \"yarn start\" \"cd ../frontend && yarn start --prefix frontend\" "
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "concurrently": "^6.0.1",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
