@@ -40,7 +40,7 @@ router.post('/api/users/login', function (req, res) {
   });
 });
 
-router.post('/api/users/auth', auth, (res, req) => {
+router.post('/api/users/auth', auth, (req, res) => {
   res.status(200).json({
     _id: req.user._id,
     isAdmin: req.user.role === 0 ? false : true,
@@ -52,7 +52,7 @@ router.post('/api/users/auth', auth, (res, req) => {
 });
 
 router.post('/api/users/logout', auth, (req, res) => {
-  User.findAndModify({ _id: req.user._id }, { token: '' }, (err, user) => {
+  User.findOneAndUpdate({ _id: req.user._id }, { token: '' }, (err, user) => {
     if (err) return res.json({ success: false, err });
     return res.status(200).send({ success: true });
   });

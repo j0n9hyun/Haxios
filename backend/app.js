@@ -14,6 +14,7 @@ mongoose
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true,
+    useFindAndModify: false,
   })
   .then(() => console.log('연결 성공'))
   .catch((e) => console.log(e));
