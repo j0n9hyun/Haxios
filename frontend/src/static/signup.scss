@@ -1,17 +1,29 @@
 @import './common.scss';
 
 .signup-page-container {
-  // border: 1px solid orange;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  .link-to {
+    margin-top: 30px;
+    a {
+      text-decoration: none;
+      color: #000;
+      &:hover {
+        color: skyblue;
+      }
+    }
+  }
   .signup-wrapper {
-    height: 500px;
+    height: 450px;
     border: 1px solid #d1d1d1;
     border-radius: 15px;
     width: 500px;
     text-align: center;
+    &.register {
+      height: 650px;
+    }
   }
   .signup-header {
     font-size: 1.5rem;
