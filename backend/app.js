@@ -7,7 +7,6 @@ const indexRouter = require('./routes/index');
 const mongoose = require('mongoose');
 const config = require('./config/key');
 const cors = require('cors');
-
 const app = express();
 
 mongoose

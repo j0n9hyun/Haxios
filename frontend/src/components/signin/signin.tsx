@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../static/signup.scss';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
-
+import { testState, idState, pwState } from '../atoms/authState';
+import {
+  useRecoilState,
+  useRecoilValueLoadable,
+  useRecoilValue,
+  useSetRecoilState,
+} from 'recoil';
 const Signin = () => {
-  const [id, setId] = useState('');
-  const [pw, setPw] = useState('');
   const history = useHistory();
+  const [id, setId] = useRecoilState(idState);
+  const [pw, setPw] = useRecoilState(pwState);
+  const family = useRecoilValue(testState);
+  let body = {
+    email: id,
+    password: pw,
+  };
+
+  // console.log(Loadable.contents);
 
   const onChangeId = (e: any) => {
     setId(e.currentTarget.value);
@@ -20,7 +33,7 @@ const Signin = () => {
     e.preventDefault();
     const call = async () => {
       await axios
-        .post('http://localhost:5000/api/users/login', {
+        .post('api/users/login', {
           email: id,
           password: pw,
         })
@@ -36,6 +49,7 @@ const Signin = () => {
     };
     call();
   };
+
   return (
     <>
       <div className='signup-page-container'>

@@ -1,18 +1,24 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 const Home = (props: any) => {
   const history = useHistory();
+  const location = useLocation();
+  const params = useParams();
   const onClick = () => {
-    axios.get('http://localhost:5000/api/users/logout').then((res) => {
-      console.log(res.data);
-      if (res.data.success === true) {
+    axios.get('/api/users/logout').then((res) => {
+      // console.log(res.data);
+      if (res.data.success) {
         history.push('/login');
       } else {
         alert('failed...');
       }
     });
   };
+  // console.log(history);
+  // console.log(location);
+  // console.log(parmas);
   return (
     <div className='logout'>
       <button onClick={onClick}>Logout</button>
@@ -20,4 +26,4 @@ const Home = (props: any) => {
   );
 };
 
-export default Home;
+export default withRouter(Home);

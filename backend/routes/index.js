@@ -28,7 +28,6 @@ router.post('/api/users/login', function (req, res) {
     user.comparePassword(req.body.password, (err, isMatch) => {
       if (!isMatch)
         return res.json({ loginSuccess: false, message: '비밀번호 매치 안됨' });
-
       user.generateToken((err, user) => {
         if (err) return res.status(400).send(err);
         res
@@ -40,7 +39,7 @@ router.post('/api/users/login', function (req, res) {
   });
 });
 
-router.post('/api/users/auth', auth, (req, res) => {
+router.get('/api/users/auth', auth, (req, res) => {
   res.status(200).json({
     _id: req.user._id,
     isAdmin: req.user.role === 0 ? false : true,
@@ -54,7 +53,9 @@ router.post('/api/users/auth', auth, (req, res) => {
 router.get('/api/users/logout', auth, (req, res) => {
   User.findOneAndUpdate({ _id: req.user._id }, { token: '' }, (err, user) => {
     if (err) return res.json({ success: false, err });
-    return res.status(200).send({ success: true });
+    return res.status(200).send({
+      success: true,
+    });
   });
 });
 
