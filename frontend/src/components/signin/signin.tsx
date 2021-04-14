@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../../static/signup.scss';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { testState, idState, pwState } from '../atoms/authState';
 import {
@@ -38,8 +38,7 @@ const Signin = () => {
           password: pw,
         })
         .then((res) => {
-          if (res.data.loginSuccess === true) {
-            console.log('success');
+          if (res.data.loginSuccess) {
             history.push('/');
           } else {
             console.log('로그인 실패');
@@ -91,4 +90,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default withRouter(Signin);

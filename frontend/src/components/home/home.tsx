@@ -8,7 +8,6 @@ const Home = (props: any) => {
   const params = useParams();
   const onClick = () => {
     axios.get('/api/users/logout').then((res) => {
-      console.log(res.data);
       if (res.data.success) {
         history.push('/signin');
       } else {
@@ -26,4 +25,4 @@ const Home = (props: any) => {
   );
 };
 
-export default Home;
+export default withRouter(Home);

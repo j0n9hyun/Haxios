@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../../static/signup.scss';
 import axios from 'axios';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory, Link, withRouter } from 'react-router-dom';
 
 const Signup = () => {
   const [id, setId] = useState('');
@@ -110,4 +110,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default withRouter(Signup);
