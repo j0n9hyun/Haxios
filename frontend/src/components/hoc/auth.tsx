@@ -4,29 +4,32 @@ import { useHistory } from 'react-router';
 
 export default function init(
   SpecificFunction: any,
-  option: any,
-  adminRoute: any = null
+  option: boolean | null,
+  adminRoute: number | null = null
 ) {
-  function Authentication(props: any) {
+  function Authentication() {
     const history = useHistory();
     useEffect(() => {
       const Call = async () => {
-        await axios.get('api/users/auth').then((res) => {
-          console.log(res.data);
-          if (!res.data.isAuth) {
-            if (option === false) {
-              history.push('/signin');
-            } else {
-              if (option === true) {
-                console.log('로그인 화면으로 이동');
+        await axios
+          .get('api/users/auth')
+          .then((res) => {
+            console.log(res.data);
+            if (!res.data.isAuth) {
+              if (option === false) {
                 history.push('/signin');
+              } else {
+                if (option === true) {
+                  console.log('로그인 화면으로 이동');
+                  history.push('/signin');
+                }
               }
             }
-          }
-        });
+          })
+          .catch((err) => console.log(err));
       };
       Call();
-    }, []);
+    });
     return <SpecificFunction />;
   }
   return Authentication;

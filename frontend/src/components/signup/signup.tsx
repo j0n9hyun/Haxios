@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import '../../static/signup.scss';
 import axios from 'axios';
 import { useHistory, Link, withRouter } from 'react-router-dom';
@@ -8,7 +8,9 @@ const Signup = () => {
   const [pw, setPw] = useState('');
   const [confirmPw, setConfirmPw] = useState('');
   const [name, setName] = useState('');
+  const [status, setStatus] = useState(0);
   const history = useHistory();
+  const ref = useRef<any>();
 
   const onChangeId = (e: any) => {
     setId(e.currentTarget.value);
@@ -29,7 +31,10 @@ const Signup = () => {
   const onSubmit = (e: any) => {
     e.preventDefault();
     if (pw !== confirmPw) {
-      return alert('비번 틀림');
+      setStatus(1);
+      ref.current.focus();
+      ref.current.style.border = '2px solid #ff6b6b';
+      return false;
     }
     const call = async () => {
       await axios
@@ -61,7 +66,6 @@ const Signup = () => {
           </div>
           <form className='signup-input' onSubmit={onSubmit}>
             <div className='signup-input-text'>ID</div>
-
             <div className='signup-input id'>
               <input
                 type='text'
@@ -77,6 +81,7 @@ const Signup = () => {
                 placeholder='비밀번호'
                 onChange={onChangePw}
                 value={pw}
+                ref={ref}
               />
             </div>
             <div className='signup-input-text'>Confirm</div>
@@ -104,6 +109,7 @@ const Signup = () => {
               <Link to='/signin'>로그인 화면으로 돌아가기</Link>
             </div>
           </form>
+          {status === 1 ? <div> password incorrect </div> : null}
         </div>
       </div>
     </>

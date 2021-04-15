@@ -8,17 +8,17 @@ import Auth from './components/hoc/auth';
 
 function App() {
   return (
-    // <Router>
-    <Switch>
-      <RecoilRoot>
-        <Suspense fallback='loading'>
-          <Route path='/' exact component={Auth(Home, false)} />
-          <Route path='/signin' component={Auth(Signin, null)} />
-          <Route path='/signup' component={Auth(Signup, null)} />
-        </Suspense>
-      </RecoilRoot>
-    </Switch>
-    // </Router>
+    <Router>
+      <Switch>
+        <RecoilRoot>
+          <Suspense fallback='loading'>
+            <Route path='/' exact component={Auth(Home, false)} />
+            <Route path='/signin' component={Auth(Signin, null)} />
+            <Route path='/signup' component={Auth(Signup, null)} />
+          </Suspense>
+        </RecoilRoot>
+      </Switch>
+    </Router>
   );
 }
 

@@ -1,25 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import '../../static/signup.scss';
 import { Link, useHistory, withRouter } from 'react-router-dom';
 import axios from 'axios';
-import { testState, idState, pwState } from '../atoms/authState';
-import {
-  useRecoilState,
-  useRecoilValueLoadable,
-  useRecoilValue,
-  useSetRecoilState,
-} from 'recoil';
+import { idState, pwState, useReset } from '../atoms/authState';
+import { useRecoilState } from 'recoil';
 const Signin = () => {
   const history = useHistory();
   const [id, setId] = useRecoilState(idState);
   const [pw, setPw] = useRecoilState(pwState);
-  const family = useRecoilValue(testState);
-  let body = {
-    email: id,
-    password: pw,
-  };
-
-  // console.log(Loadable.contents);
+  const Reset = useReset();
 
   const onChangeId = (e: any) => {
     setId(e.currentTarget.value);
@@ -47,6 +36,8 @@ const Signin = () => {
         .catch((err) => console.log(err));
     };
     call();
+    Reset.resetId();
+    Reset.resetPw();
   };
 
   return (
