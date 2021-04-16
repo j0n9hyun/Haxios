@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import '../../static/signup.scss';
 import { Link, useHistory, withRouter } from 'react-router-dom';
-import axios from 'axios';
-import { idState, pwState, useReset } from '../atoms/authState';
+import { idState, pwState, Reset, submitState } from '../atoms/authState';
 import { useRecoilState } from 'recoil';
 const Signin = () => {
   const history = useHistory();
   const [id, setId] = useRecoilState(idState);
   const [pw, setPw] = useRecoilState(pwState);
-  const Reset = useReset();
-
+  const { resetId, resetPw } = Reset();
+  const ref = useRef<any>();
   const onChangeId = (e: any) => {
     setId(e.currentTarget.value);
   };
@@ -18,26 +17,22 @@ const Signin = () => {
     setPw(e.currentTarget.value);
   };
 
-  const onSubmit = (e: any) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault();
-    const call = async () => {
-      await axios
-        .post('api/users/login', {
-          email: id,
-          password: pw,
-        })
-        .then((res) => {
-          if (res.data.loginSuccess) {
-            history.push('/');
-          } else {
-            console.log('로그인 실패');
-          }
-        })
-        .catch((err) => console.log(err));
-    };
-    call();
-    Reset.resetId();
-    Reset.resetPw();
+    try {
+      await submitState(id, pw).then((res) => {
+        resetId();
+        resetPw();
+        if (res.loginSuccess) {
+          history.push('/');
+        } else {
+          ref.current.focus();
+          console.log('login failed');
+        }
+      });
+    } catch {
+      console.log('err');
+    }
   };
 
   return (
@@ -57,6 +52,7 @@ const Signin = () => {
                 placeholder='아이디'
                 onChange={onChangeId}
                 value={id}
+                ref={ref}
               />
             </div>
             <div className='signup-input-text'>Password</div>

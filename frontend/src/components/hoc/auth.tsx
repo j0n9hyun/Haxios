@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
 import { useHistory } from 'react-router';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { authenticationState } from '../atoms/authState';
 
-export default function init(
+export default function Auth(
   SpecificFunction: any,
   option: boolean | null,
   adminRoute: number | null = null
@@ -10,26 +11,18 @@ export default function init(
   function Authentication() {
     const history = useHistory();
     useEffect(() => {
-      const Call = async () => {
-        await axios
-          .get('api/users/auth')
-          .then((res) => {
-            console.log(res.data);
-            if (!res.data.isAuth) {
-              if (option === false) {
-                history.push('/signin');
-              } else {
-                if (option === true) {
-                  console.log('로그인 화면으로 이동');
-                  history.push('/signin');
-                }
-              }
+      authenticationState().then((res: any) => {
+        if (!res.isAuth) {
+          if (option === false) {
+            history.push('/signin');
+          } else {
+            if (option === true) {
+              history.push('/signin');
             }
-          })
-          .catch((err) => console.log(err));
-      };
-      Call();
-    });
+          }
+        }
+      });
+    }, []);
     return <SpecificFunction />;
   }
   return Authentication;

@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import axios from 'axios';
-import { withRouter } from 'react-router-dom';
+import { useHistory, withRouter } from 'react-router-dom';
+import { logoutState } from '../atoms/authState';
+
 const Home = (props: any) => {
   const history = useHistory();
   const onClick = () => {
-    axios.get('/api/users/logout').then((res) => {
-      if (res.data.success) {
+    logoutState().then((res) => {
+      if (res.success) {
         history.push('/signin');
       } else {
-        alert('failed...');
+        alert('failed');
       }
     });
   };
