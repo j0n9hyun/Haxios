@@ -3,6 +3,7 @@ import '../../static/signup.scss';
 import { Link, useHistory, withRouter } from 'react-router-dom';
 import { idState, pwState, Reset, submitState } from '../atoms/authState';
 import { useRecoilState } from 'recoil';
+import title from '../../static/title.svg';
 const Signin = () => {
   const history = useHistory();
   const [id, setId] = useRecoilState(idState);
@@ -39,6 +40,9 @@ const Signin = () => {
     <>
       <div className='signup-page-container'>
         <div className='signup-wrapper'>
+          <figure style={{ marginTop: '20px' }}>
+            <img src={title} alt='' />
+          </figure>
           <div className='signup-header'>
             Sign In
             <div className='signup-header-subtitle'>로그인 페이지</div>

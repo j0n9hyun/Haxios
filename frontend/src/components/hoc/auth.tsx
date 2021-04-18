@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { authenticationState } from '../atoms/authState';
-
+import Loading from './loading';
 export default function Auth(
   SpecificFunction: any,
   option: boolean | null,

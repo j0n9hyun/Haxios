@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import '../../static/signup.scss';
 import axios from 'axios';
 import { useHistory, Link, withRouter } from 'react-router-dom';
-
+import title from '../../static/title.svg';
 const Signup = () => {
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
@@ -60,6 +60,9 @@ const Signup = () => {
     <>
       <div className='signup-page-container'>
         <div className='signup-wrapper register'>
+          <figure style={{ marginTop: '20px' }}>
+            <img src={title} alt='' />
+          </figure>
           <div className='signup-header'>
             Sign Up
             <div className='signup-header-subtitle'>회원가입 페이지</div>
