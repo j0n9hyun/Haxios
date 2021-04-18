@@ -12,9 +12,9 @@ function App() {
       <Switch>
         <RecoilRoot>
           <Suspense fallback='loading'>
-            <Route path='/' exact component={Auth(Home, false)} />
-            <Route path='/signin' component={Auth(Signin, null)} />
-            <Route path='/signup' component={Auth(Signup, null)} />
+            <Route path='/' exact component={Auth(Home, true)} />
+            <Route path='/signin' exact component={Auth(Signin, false)} />
+            <Route path='/signup' exact component={Auth(Signup, false)} />
           </Suspense>
         </RecoilRoot>
       </Switch>

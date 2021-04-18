@@ -12,12 +12,20 @@ export default function Auth(
     const history = useHistory();
     useEffect(() => {
       authenticationState().then((res: any) => {
+        console.log(res);
         if (!res.isAuth) {
-          if (option === false) {
+          if (option) {
             history.push('/signin');
+            console.log('option: true');
+          }
+        } else {
+          if (adminRoute && !res.isAdmin) {
+            history.push('/signin');
+            console.log('adminRoute ! resadmin');
           } else {
-            if (option === true) {
-              history.push('/signin');
+            if (option === false) {
+              console.log('option: false');
+              history.push('/');
             }
           }
         }
