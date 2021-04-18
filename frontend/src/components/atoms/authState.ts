@@ -1,6 +1,6 @@
 import { atom, useResetRecoilState } from 'recoil';
 import axios from 'axios';
-
+axios.defaults.withCredentials = true;
 export const idState = atom({
   key: 'idState',
   default: '',
