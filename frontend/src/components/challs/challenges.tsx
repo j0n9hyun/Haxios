@@ -3,7 +3,7 @@ import { Link, useHistory, withRouter } from 'react-router-dom';
 import { logoutState } from '../atoms/authState';
 import title from '../../static/haxios.svg';
 import '../../static/home.scss';
-const Home = (props: any) => {
+const Challenges = (props: any) => {
   const history = useHistory();
   const onClick = () => {
     logoutState().then((res) => {
@@ -28,9 +28,11 @@ const Home = (props: any) => {
         <div className='home-sidemenu'>
           <div className='home-category'>
             <ul>
-              <li className='active'>Home</li>
+              <Link to='/'>
+                <li className=''>Home</li>
+              </Link>
               <Link to='/challs'>
-                <li>Challenges</li>
+                <li className='active'>Challenges</li>
               </Link>
               <li>Ranking</li>
             </ul>
@@ -38,8 +40,6 @@ const Home = (props: any) => {
         </div>
         <div className='copyright'>ⓒ 2021. j0n9hyun all rights reserved.</div>
       </div>
-      <div className='notification'></div>
-      <div className='activity'></div>
       {/* <div className='logout'>
         <figure style={{ marginTop: '20px' }}>
           <img src={title} alt='' />
@@ -50,4 +50,4 @@ const Home = (props: any) => {
   );
 };
 
-export default withRouter(Home);
+export default withRouter(Challenges);

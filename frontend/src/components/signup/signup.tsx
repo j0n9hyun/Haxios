@@ -3,6 +3,7 @@ import '../../static/signup.scss';
 import axios from 'axios';
 import { useHistory, Link, withRouter } from 'react-router-dom';
 import title from '../../static/title.svg';
+import { registerState } from '../atoms/authState';
 const Signup = () => {
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
@@ -37,16 +38,11 @@ const Signup = () => {
       return false;
     }
     const call = async () => {
-      await axios
-        .post('http://localhost:5000/api/users/register', {
-          email: id,
-          password: pw,
-          name: name,
-        })
+      await axios;
+      registerState(id, pw, name)
         .then((res) => {
-          if (res.data.success === true) {
-            console.log('success');
-            history.push('/signin');
+          if (res.success) {
+            history.push('/login');
           } else {
             console.log('회원가입 실패');
           }
@@ -109,7 +105,7 @@ const Signup = () => {
               <button>회원가입</button>
             </div>
             <div className='link-to'>
-              <Link to='/signin'>로그인 화면으로 돌아가기</Link>
+              <Link to='/login'>로그인 화면으로 돌아가기</Link>
             </div>
           </form>
           {status === 1 ? <div> password incorrect </div> : null}

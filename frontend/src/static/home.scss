@@ -1,5 +1,128 @@
 @import './common.scss';
 
-.logout {
-  border: 1px solid skyblue;
+.home-container {
+  // border: 1px solid red;
+  background: #343a40;
+  height: 100vh;
+}
+
+.home-sidebar {
+  @media screen and(max-width: 768px) {
+    width: 100px;
+    font-size: 0.5em;
+  }
+  width: 250px;
+  background: #313449;
+  // position: fixed;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  // border-top-right-radius: 15px;
+  // border-bottom-right-radius: 15px;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: 3px 3px 30px -13px #000;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #d1d1d1; /*스크롤바의 색상*/
+    background-clip: padding-box;
+    border: 3px solid transparent;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: grey;
+  }
+  .title-wrapper {
+    text-align: center;
+    padding: 15px;
+    // border: 1px solid skyblue;
+  }
+  .home-sidemenu {
+    @media screen and(max-width: 768px) {
+      width: 100px;
+      font-size: 0.5em;
+    }
+    width: 218px;
+    height: 80%;
+    background: rgba(100, 108, 168, 0.8);
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+  }
+  .home-category {
+    color: #f1f1f1;
+    text-align: center;
+    a {
+      text-decoration: none;
+      color: #f1f1f1;
+    }
+    font-size: 1.5em;
+    li {
+      padding: 15px;
+
+      cursor: pointer;
+      &.active {
+        transition: opacity 0.2s ease-in-out;
+        color: #fff;
+        // border-radius: 0 60px 60px 0;
+        border-radius: 50px;
+        width: 200px;
+        background: linear-gradient(
+          to right,
+          #8971ea,
+          #7f72ea,
+          #7574ea,
+          #6a75e9,
+          #5f76e8
+        );
+      }
+
+      &:hover {
+        color: skyblue;
+        opacity: 0.5;
+        // transition: all 0.5s ease-out;
+      }
+    }
+  }
+
+  .copyright {
+    @media screen and(max-width: 768px) {
+      width: 100px;
+      font-size: 0.5em;
+    }
+    // border: 1px solid red;
+    display: flex;
+    align-items: center;
+    height: 100px;
+    color: #f1f1f1;
+    font-size: 0.8em;
+    font-weight: 300;
+  }
+}
+
+.notification {
+  position: absolute;
+  width: 773px;
+  height: 437px;
+  left: 319px;
+  top: 557px;
+
+  background: #f3d9fa;
+  border-radius: 20px;
+}
+
+.activity {
+  position: absolute;
+  width: 288px;
+  height: 628px;
+  left: 1122px;
+  top: 366px;
+  background: #fcc2d7;
+  border-radius: 20px;
 }

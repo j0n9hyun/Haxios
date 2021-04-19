@@ -72,7 +72,7 @@ const Signin = () => {
               <button>로그인</button>
             </div>
             <div className='link-to'>
-              <Link to='/signup'>회원가입</Link>
+              <Link to='/register'>회원가입</Link>
             </div>
           </form>
         </div>
