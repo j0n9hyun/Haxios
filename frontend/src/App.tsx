@@ -21,7 +21,7 @@ function App() {
             <Route path='/register' exact component={Auth(Signup, false)} />
             <Route path='/profile' exact component={Auth(Profile, true)} />
             <Route path='/rank' exact component={Auth(Rank, true)} />
-            <Route path='/challs' exact component={Auth(Challenges, null)} />
+            <Route path='/challs' exact component={Auth(Challenges, true)} />
           </Suspense>
         </RecoilRoot>
       </Switch>

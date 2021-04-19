@@ -3,6 +3,7 @@ import { Link, useHistory, withRouter } from 'react-router-dom';
 import { logoutState } from '../atoms/authState';
 import title from '../../static/haxios.svg';
 import '../../static/home.scss';
+import '../../static/challs.scss';
 const Challenges = (props: any) => {
   const history = useHistory();
   const onClick = () => {
@@ -25,6 +26,12 @@ const Challenges = (props: any) => {
         <div className='title-wrapper'>
           <img src={title} alt='' />
         </div>
+        <div className='challs-wrapper'>
+          <div className='challs-box'>
+            <div className='challs-title'>Buffer Overflow</div>
+          </div>
+          <div className='challs-box-correct'></div>
+        </div>
         <div className='home-sidemenu'>
           <div className='home-category'>
             <ul>
@@ -40,12 +47,6 @@ const Challenges = (props: any) => {
         </div>
         <div className='copyright'>ⓒ 2021. j0n9hyun all rights reserved.</div>
       </div>
-      {/* <div className='logout'>
-        <figure style={{ marginTop: '20px' }}>
-          <img src={title} alt='' />
-        </figure>
-        <button onClick={onClick}>Logout</button>
-      </div> */}
     </div>
   );
 };

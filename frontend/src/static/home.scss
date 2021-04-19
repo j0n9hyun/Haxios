@@ -6,6 +6,16 @@
   height: 100vh;
 }
 
+.modal {
+  // position: fixed;
+  // top: 0;
+  // right: 0;
+  // bottom: 0;
+  // left: 0;
+  // background: rgba(0, 0, 0, 0);
+  background-color: red;
+}
+
 .home-sidebar {
   @media screen and(max-width: 768px) {
     width: 100px;
@@ -62,7 +72,7 @@
       text-decoration: none;
       color: #f1f1f1;
     }
-    font-size: 1.5em;
+    font-size: 1.2em;
     li {
       padding: 15px;
 
@@ -125,4 +135,51 @@
   top: 366px;
   background: #fcc2d7;
   border-radius: 20px;
+}
+
+.login-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: absolute;
+  // border: 1px solid red;
+  right: 50px;
+  width: 300px;
+  max-width: 100%;
+  top: 20px;
+  a {
+    text-decoration: none;
+    color: #f1f1f1;
+    &:hover {
+      color: skyblue;
+    }
+  }
+  .login-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #646ca8;
+    border-radius: 15px;
+    width: 120px;
+    height: 40px;
+    color: #f1f1f1;
+    font-size: 1em;
+    cursor: pointer;
+    // font-weight: bold;
+    box-shadow: 3px 3px 30px -13px #000;
+  }
+
+  .register-button {
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    background: #646ca8;
+    border-radius: 15px;
+    width: 120px;
+    height: 40px;
+    color: #f1f1f1;
+    font-size: 1em;
+    box-shadow: 3px 3px 30px -13px #000;
+  }
 }

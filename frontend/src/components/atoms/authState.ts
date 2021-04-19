@@ -11,6 +11,11 @@ export const pwState = atom({
   default: '',
 });
 
+export const isLoginState = atom({
+  key: 'isLoginState',
+  default: false,
+})
+
 
 export type RegisterProps = {
   id: any;
