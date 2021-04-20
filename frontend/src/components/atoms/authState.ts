@@ -57,6 +57,7 @@ export async function authenticationState() {
   const response: any = await axios.get('api/users/auth');
   return response.data;
 }
+
 export const testState = selector({
   key: 'testState',
   get: async() => {

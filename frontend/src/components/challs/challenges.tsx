@@ -1,53 +1,38 @@
-import React, { useEffect, useRef } from 'react';
-import { Link, useHistory, withRouter } from 'react-router-dom';
-import { logoutState } from '../atoms/authState';
+import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import title from '../../static/haxios.svg';
 import '../../static/home.scss';
 import '../../static/challs.scss';
+import Navbar from '../Nav';
+import Menu from '../menu';
 const Challenges = (props: any) => {
-  const history = useHistory();
-  const onClick = () => {
-    logoutState().then((res) => {
-      if (res.success) {
-        history.push('/signin');
-      } else {
-        alert('failed');
-      }
-    });
-  };
-
-  const onClickChalls = (e: any) => {
-    history.push('/challs');
-  };
-
   return (
-    <div className='home-container'>
-      <div className='home-sidebar'>
-        <div className='title-wrapper'>
-          <img src={title} alt='' />
+    <>
+      <Menu />
+      <Navbar />
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <div
+          style={{
+            position: 'absolute',
+            border: '1px solid skyblue',
+            fontSize: '2rem',
+            width: '300px',
+            height: '300px',
+            top: '0',
+            color: '#fff',
+            textAlign: 'center',
+          }}
+        >
+          하이
         </div>
-        <div className='challs-wrapper'>
-          <div className='challs-box'>
-            <div className='challs-title'>Buffer Overflow</div>
-          </div>
-          <div className='challs-box-correct'></div>
-        </div>
-        <div className='home-sidemenu'>
-          <div className='home-category'>
-            <ul>
-              <Link to='/'>
-                <li className=''>Home</li>
-              </Link>
-              <Link to='/challs'>
-                <li className='active'>Challenges</li>
-              </Link>
-              <li>Ranking</li>
-            </ul>
-          </div>
-        </div>
-        <div className='copyright'>ⓒ 2021. j0n9hyun all rights reserved.</div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -2,7 +2,7 @@
 
 .home-container {
   // border: 1px solid red;
-  background: #343a40;
+  background: #212529;
   height: 100vh;
 }
 
@@ -59,7 +59,7 @@
     width: 218px;
     height: 80%;
     background: rgba(100, 108, 168, 0.8);
-    border-radius: 25px;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -96,6 +96,19 @@
       &:hover {
         color: skyblue;
         opacity: 0.5;
+        transition: opacity 0.2s ease-out;
+        color: #fff;
+        // border-radius: 0 60px 60px 0;
+        border-radius: 50px;
+        width: 200px;
+        background: linear-gradient(
+          to right,
+          #8971ea,
+          #7f72ea,
+          #7574ea,
+          #6a75e9,
+          #5f76e8
+        );
         // transition: all 0.5s ease-out;
       }
     }
@@ -167,6 +180,10 @@
     cursor: pointer;
     // font-weight: bold;
     box-shadow: 3px 3px 30px -13px #000;
+    &:hover {
+      background: rgb(23, 43, 77);
+      transition: all 0.5s ease-out;
+    }
   }
 
   .register-button {
@@ -181,5 +198,179 @@
     color: #f1f1f1;
     font-size: 1em;
     box-shadow: 3px 3px 30px -13px #000;
+    &:hover {
+      background: rgb(23, 43, 77);
+      transition: all 0.5s ease-out;
+    }
+  }
+}
+
+.Signup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+  .modalContainer {
+    width: 480px;
+    height: 621px;
+    // position: absolute;
+    // box-sizing: border-box;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff; //로그인 배경
+  }
+}
+
+.signup-page-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // border: 1px solid red;
+  //
+  // height: 500px;
+  width: 500px;
+  margin: 0 auto;
+  .link-to {
+    margin-top: 30px;
+    a {
+      text-decoration: none;
+      color: #000;
+      &:hover {
+        color: skyblue;
+      }
+    }
+  }
+  .signup-wrapper {
+    background: #f1f1f1;
+    height: 500px;
+    border: 1px solid #d1d1d1;
+    border-radius: 15px;
+    width: 500px;
+    text-align: center;
+    &.register {
+      height: 700px;
+    }
+  }
+  .signup-header {
+    font-size: 1.5rem;
+    padding-left: 25px;
+    text-align: left;
+    margin-top: 20px;
+    .signup-header-subtitle {
+      margin: 20px 0 25px;
+      color: gray;
+      font-size: 0.6em;
+    }
+  }
+  .signup-input {
+    .signup-input-text {
+      text-align: left;
+      padding-left: 35px;
+      color: gray;
+      font-size: 0.8em;
+      // border: 1px solid red;
+    }
+    .signup-button {
+      button {
+        outline: none;
+        border: 1px solid #f1f1f1;
+        background: rgb(86, 100, 210);
+        color: #f1f1f1;
+        font-weight: bold;
+        cursor: pointer;
+        width: 90%;
+        border-radius: 15px;
+        height: 40px;
+        transition: all 0.5s ease-out;
+        box-shadow: (0 0 0 / 15%) 0px 2px 4px;
+        &:hover {
+          background: rgb(23, 43, 77);
+        }
+      }
+    }
+    &.id {
+      // background-color: red;
+      input {
+        margin: 10px 0 30px 0;
+        width: 90%;
+        border: 1px solid #d1d1d1;
+        border-radius: 15px;
+        height: 50px;
+        outline: none;
+        padding-left: 10px;
+        font-size: 1em;
+        &:hover {
+          border: 1px solid #000;
+        }
+        &:focus {
+          border: 2px solid rgb(86, 100, 210);
+        }
+      }
+    }
+    &.pw {
+      input {
+        margin: 10px 0 30px 0;
+        width: 90%;
+        border: 1px solid #d1d1d1;
+        border-radius: 15px;
+        height: 50px;
+        outline: none;
+        padding-left: 10px;
+        font-size: 1em;
+        &:hover {
+          border: 1px solid #000;
+        }
+        &:focus {
+          border: 2px solid rgb(86, 100, 210);
+        }
+      }
+    }
+  }
+}
+
+.challs-wrapper {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  bottom: 0;
+  margin-bottom: 30px;
+  align-items: center;
+  flex-direction: column;
+  width: calc(100% - 300px);
+  min-width: 0;
+  background: #313449;
+  left: 275px;
+  height: 75%;
+  border-radius: 15px;
+  box-shadow: 2px 5px 10px 2px rgba(0, 0, 0, 0.25);
+  // border: 1px solid red;
+
+  .challs-box-correct {
+    position: absolute;
+    width: 150px;
+    left: 0;
+    height: 100px;
+    // left: 497px;
+    // top: 323px;
+
+    border: 1px solid #6197ca;
+    box-sizing: border-box;
+    border-radius: 10px;
+  }
+  .challs-box {
+    position: relative;
+    width: 150px;
+    height: 100px;
+
+    border: 1px solid #d78888;
+    box-sizing: border-box;
+    border-radius: 10px;
+    .challs-title {
+      color: #f1f1f1;
+    }
   }
 }
