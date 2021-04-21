@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import { isLoginState, logoutState } from '../atoms/authState';
+import { Link, useHistory } from 'react-router-dom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import {
+  isLoginState,
+  logoutState,
+  authenticationSeletor,
+} from '../atoms/authState';
 import Login from '../signin/login';
 import Register from '../signup/register';
 
@@ -27,12 +31,21 @@ const Navbar = () => {
       }
     });
   };
+
+  const { name } = useRecoilValue(authenticationSeletor);
+  const history = useHistory<any>();
   return (
     <div>
+      <div className='welcome-user-wrapper'>
+        <div className='welcome-user'>{name}님! 환영합니다.</div>
+      </div>
       {isLogin === true ? (
         <div className='login-wrapper'>
-          <div className='login-button'>
-            <Link to='/profile'>프로필</Link>
+          <div
+            className='login-button'
+            onClick={() => history.push('/profile')}
+          >
+            프로필
           </div>
           <div className='login-button' onClick={onClickLogout}>
             로그아웃
@@ -42,12 +55,9 @@ const Navbar = () => {
         <div className='login-wrapper'>
           <div className='login-button' onClick={handleModalLogin}>
             로그인
-            {/* <Link to='/login'>
-              </Link> */}
           </div>
           <div className='register-button' onClick={handleModal}>
             회원가입
-            {/* <Link to='/register'>회원가입</Link> */}
           </div>
         </div>
       )}

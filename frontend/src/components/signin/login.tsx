@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import '../../static/home.scss';
 import { withRouter } from 'react-router-dom';
 import { idState, pwState, Reset, submitState } from '../atoms/authState';
@@ -30,6 +30,10 @@ const Login = ({ handleModalLogin, modalIsOpenL }: any) => {
       console.log('err');
     }
   };
+
+  useEffect(() => {
+    ref.current.focus();
+  }, []);
 
   return (
     <>

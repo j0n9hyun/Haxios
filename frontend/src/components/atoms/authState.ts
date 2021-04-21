@@ -58,7 +58,7 @@ export async function authenticationState() {
   return response.data;
 }
 
-export const testState = selector({
+export const authenticationSeletor = selector({
   key: 'testState',
   get: async() => {
     const response: any = await axios.get('api/users/auth');

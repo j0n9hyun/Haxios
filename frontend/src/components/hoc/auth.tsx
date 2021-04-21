@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   authenticationState,
   isLoginState,
-  testState,
+  authenticationSeletor,
 } from '../atoms/authState';
 export default function Auth(
   SpecificFunction: any,
@@ -14,10 +14,10 @@ export default function Auth(
   function Authentication() {
     const history = useHistory();
     const setIsLogin = useSetRecoilState(isLoginState);
-    const [authentication, setAuthentication] = useRecoilState(testState);
+    const { isAuth, isAdmin } = useRecoilValue(authenticationSeletor);
 
     useEffect(() => {
-      if (!authentication.isAuth) {
+      if (!isAuth) {
         setIsLogin(false);
         if (option) {
           history.push('/');
@@ -25,7 +25,7 @@ export default function Auth(
         }
       } else {
         setIsLogin(true);
-        if (adminRoute && !authentication.isAdmin) {
+        if (adminRoute && !isAdmin) {
           history.push('/login');
           console.log('asdasd');
         } else {

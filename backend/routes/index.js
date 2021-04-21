@@ -45,8 +45,9 @@ router.get('/api/users/auth', auth, (req, res) => {
     isAdmin: req.user.role === 0 ? false : true,
     isAuth: true,
     email: req.user.email,
+    name: req.user.name,
+    role: req.user.role,
     // lastname: req.user.lastname,
-    // role: req.user.role,
     // image: req.user.image,
   });
 });
