@@ -2,10 +2,15 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
-  authenticationState,
   isLoginState,
   authenticationSeletor,
+  modalLState,
 } from '../atoms/authState';
+/* 
+null: everyone,
+true: only logged in
+false: only not logged in
+*/
 export default function Auth(
   SpecificFunction: any,
   option: boolean | null,
@@ -14,12 +19,14 @@ export default function Auth(
   function Authentication() {
     const history = useHistory();
     const setIsLogin = useSetRecoilState(isLoginState);
+    const [modalIsOpenL, setModalIsOpenL] = useRecoilState(modalLState);
     const { isAuth, isAdmin } = useRecoilValue(authenticationSeletor);
 
     useEffect(() => {
       if (!isAuth) {
         setIsLogin(false);
         if (option) {
+          setModalIsOpenL(!modalIsOpenL);
           history.push('/');
           console.log('option: true');
         }
@@ -27,7 +34,7 @@ export default function Auth(
         setIsLogin(true);
         if (adminRoute && !isAdmin) {
           history.push('/login');
-          console.log('asdasd');
+          console.log('admin');
         } else {
           if (option === false) {
             console.log('option: false');
@@ -35,26 +42,6 @@ export default function Auth(
           }
         }
       }
-      // authenticationState().then((res: any) => {
-      //   if (!res.isAuth) {
-      //     setIsLogin(false);
-      //     if (option) {
-      //       history.push('/');
-      //       console.log('option: true');
-      //     }
-      //   } else {
-      //     setIsLogin(true);
-      //     if (adminRoute && !res.isAdmin) {
-      //       history.push('/login');
-      //       console.log('asdasd');
-      //     } else {
-      //       if (option === false) {
-      //         console.log('option: false');
-      //         history.push('/');
-      //       }
-      //     }
-      //   }
-      // });
     }, []);
     return <SpecificFunction />;
   }

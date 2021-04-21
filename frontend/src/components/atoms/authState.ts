@@ -16,6 +16,16 @@ export const isLoginState = atom({
   default: false,
 })
 
+export const modalState = atom({
+  key: 'modalState',
+  default: false,
+})
+
+export const modalLState = atom({
+  key: 'modalLState',
+  default: false,
+})
+
 
 export type RegisterProps = {
   id: any;

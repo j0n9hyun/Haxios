@@ -10,6 +10,11 @@ const Home = () => {
     <>
       <Menu />
       <Navbar />
+      <div className='rule-wrapper'>
+        <div className='rule-title'>
+          About<p>asdasdasdasdasdads</p>
+        </div>
+      </div>
     </>
   );
 };

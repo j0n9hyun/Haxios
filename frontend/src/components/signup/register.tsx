@@ -97,11 +97,11 @@ const Register = ({ handleModal }: any) => {
                   value={confirmPw}
                 />
               </div>
-              <div className='signup-input-text'>Name</div>
+              <div className='signup-input-text'>Nickname</div>
               <div className='signup-input pw'>
                 <input
                   type='text'
-                  placeholder='이름'
+                  placeholder='닉네임'
                   onChange={onChangeName}
                   value={name}
                 />

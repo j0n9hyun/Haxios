@@ -5,14 +5,16 @@ import {
   isLoginState,
   logoutState,
   authenticationSeletor,
+  modalState,
+  modalLState,
 } from '../atoms/authState';
 import Login from '../signin/login';
 import Register from '../signup/register';
 
 const Navbar = () => {
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [modalIsOpenL, setModalIsOpenL] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useRecoilState(modalState);
+  const [modalIsOpenL, setModalIsOpenL] = useRecoilState(modalLState);
 
   const handleModal = (e: any) => {
     setModalIsOpen(!modalIsOpen);

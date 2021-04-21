@@ -6,17 +6,21 @@ import '../../static/home.scss';
 const Menu = () => {
   const history = useHistory<any>();
   const { pathname } = useLocation();
-  const onClick = (e: any) => {
+  const onClickHome = (e: any) => {
     history.push('/');
   };
-  const onClick2 = (e: any) => {
+  const onClickChalls = (e: any) => {
     history.push('/challs');
+  };
+
+  const onClickRank = (e: any) => {
+    history.push('/rank');
   };
 
   return (
     <>
       <div className='home-container'>
-        <div className='home-sidebar'>
+        <div className='home-sidebar mini'>
           <div className='title-wrapper'>
             <img src={title} alt='' />
           </div>
@@ -25,20 +29,23 @@ const Menu = () => {
             <ul>
               <li
                 className={pathname === '/' ? 'active' : ''}
-                id='list'
-                onClick={onClick}
+                onClick={onClickHome}
               >
                 Home
               </li>
 
               <li
                 className={pathname === '/challs' ? 'active' : ''}
-                id='list'
-                onClick={onClick2}
+                onClick={onClickChalls}
               >
                 Challenges
               </li>
-              <li>Ranking</li>
+              <li
+                className={pathname === '/rank' ? 'active' : ''}
+                onClick={onClickRank}
+              >
+                Ranking
+              </li>
             </ul>
           </div>
 
