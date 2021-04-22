@@ -67,6 +67,18 @@ export async function authenticationState() {
   const response: any = await axios.get('api/users/auth');
   return response.data;
 }
+export async function challengesState() {
+  const response: any = await axios.get('api/users/challs');
+  return response.data;
+}
+
+export const challengesSelector = selector({
+  key: 'challengesSelector',
+  get: async() => {
+    const response: any = await axios.get('api/users/challs');
+    return response.data;
+  }
+})
 
 export const authenticationSeletor = selector({
   key: 'testState',

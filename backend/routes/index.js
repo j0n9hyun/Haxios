@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const { User } = require('../models/User');
+const { Challenge } = require('../models/Challenge');
+const { Challenges } = require('../models/Challenges');
 const { auth } = require('../middleware/auth');
+const { json } = require('express');
 
 /* GET home page. */
 router.get('/', function (req, res) {
@@ -58,6 +61,50 @@ router.get('/api/users/logout', auth, (req, res) => {
     return res.status(200).send({
       success: true,
     });
+  });
+});
+
+router.get('/api/users/test', auth, (req, res) => {
+  const chall = new Challenge(req.body);
+  chall.save((err, uesrInfo) => {
+    if (err) return res.json({ success: false, err });
+    return res.status(200).json({ success: true });
+  });
+  console.log(chall);
+});
+
+router.post('/api/users/chall', (req, res) => {
+  const chall = new Challenge(req.body);
+
+  chall.save((err, uesrInfo) => {
+    if (err) return res.json({ success: false, err });
+    return res.status(200).json({ success: true });
+  });
+  // res.status(200).json({
+  //   title: chall.title,
+  //   category: chall.category,
+  //   description: chall.description,
+  //   point: chall.point,
+  //   flag: chall.title,
+  //   solves: chall.solves,
+  // });
+});
+
+router.post('/api/users/challs', (req, res) => {
+  const challs = new Challenges(req.body);
+  if (res.status(200).json('하이')) {
+    challs.save();
+  }
+  console.log(challs);
+});
+
+router.get('/api/users/challs', auth, (req, res) => {
+  Challenges.find({}, function (err, cb) {
+    if (!err) {
+      res.status(200).json(cb);
+    } else {
+      throw err;
+    }
   });
 });
 

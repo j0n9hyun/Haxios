@@ -39,7 +39,9 @@ const Navbar = () => {
   return (
     <div>
       <div className='welcome-user-wrapper'>
-        <div className='welcome-user'>{name}님! 환영합니다.</div>
+        <div className='welcome-user'>
+          {name ? `${name}님! 환영합니다.` : ''}
+        </div>
       </div>
       {isLogin === true ? (
         <div className='login-wrapper'>

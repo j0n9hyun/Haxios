@@ -42,7 +42,7 @@ body {
     font-size: 0.8em;
     &.mini {
       // background: red;
-      width: 50px;
+      width: 130px;
     }
   }
   width: 250px;
@@ -75,6 +75,12 @@ body {
   .title-wrapper {
     text-align: center;
     padding: 15px;
+    img {
+      @media screen and(max-width: 768px) {
+        width: 110px;
+        font-size: 0.5em;
+      }
+    }
     // border: 1px solid skyblue;
   }
   .home-sidemenu {
@@ -92,8 +98,14 @@ body {
     padding: 30px;
   }
   .home-category {
+    @media screen and(max-width: 768px) {
+      // text-align: left;
+      margin-left: 50px;
+      font-size: 1em;
+      width: 220px;
+    }
     color: #f1f1f1;
-    text-align: center;
+    // text-align: center;
     a {
       text-decoration: none;
       color: #f1f1f1;
@@ -134,13 +146,19 @@ body {
       width: 100px;
       font-size: 0.5em;
     }
-    // border: 1px solid red;
     display: flex;
-    align-items: center;
-    height: 100px;
-    color: #f1f1f1;
-    font-size: 0.8em;
-    font-weight: 300;
+    height: 100%;
+    align-items: flex-end;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    // border: 1px solid red;
+    // margin-top: 500px;
+    // height: 300px;
+    .copyright-text {
+      color: #f1f1f1;
+      font-size: 0.8em;
+      font-weight: 300;
+    }
   }
 }
 
@@ -166,6 +184,10 @@ body {
 }
 
 .login-wrapper {
+  @media screen and(max-width: 768px) {
+    font-size: 0.8em;
+    width: 200px;
+  }
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -183,6 +205,10 @@ body {
     }
   }
   .login-button {
+    @media screen and(max-width: 768px) {
+      margin-left: 30px;
+    }
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -354,7 +380,7 @@ body {
 .challs-wrapper {
   @media screen and(max-width: 768px) {
     width: calc(100% - 200px);
-    margin-top: 30px;
+    margin-top: 100px;
     left: 150px;
   }
   display: flex;
@@ -362,7 +388,8 @@ body {
   justify-content: center;
   position: absolute;
   // top: 10%;
-  margin-top: 60px;
+  // margin-top: 60px;
+  margin-top: 250px;
   margin-bottom: 30px;
   width: calc(100% - 300px);
   min-width: 0;
@@ -402,15 +429,30 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin: 30px 20px 0 20px;
+    margin: 30px 20px 30px 20px;
     width: 240px;
     height: 150px;
     border: 1px solid #ffc9c9;
     border-radius: 10px;
     box-shadow: 3px 3px 30px -13px #000;
+    .challs-tag {
+      border: none;
+      background: #b197fc;
+      color: #f1f1f1;
+      // width: 50px;
+      // padding: 3px;
+      padding: 5px 10px;
+      text-align: center;
+      position: absolute;
+      margin-top: 70px;
+      border-radius: 10px;
+    }
     .challs-title {
       color: #f1f1f1;
       font-weight: bold;
+      width: 200px;
+      text-align: center;
+      // border: 1px solid red;
     }
     &:hover {
       background: #fcc2d7;
@@ -418,6 +460,10 @@ body {
       border: none;
       transition: all 0.3s ease-in-out;
       .challs-title {
+        color: #000;
+        transition: all 0.3s ease-out;
+      }
+      .challs-tag {
         color: #000;
         transition: all 0.3s ease-out;
       }
@@ -434,7 +480,7 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin: 30px 20px 0 20px;
+    margin: 30px 20px 20px 20px;
     width: 240px;
     height: 150px;
     border: 1px solid #6197ca;
@@ -455,22 +501,33 @@ body {
         color: #000;
         transition: all 0.3s ease-in-out;
       }
+      .challs-tag {
+        color: #000;
+      }
     }
   }
 }
 
 .welcome-user-wrapper {
+  @media screen and(max-width: 768px) {
+    // visibility: hidden;
+    // border: 1px solid red;
+  }
   display: flex;
-  justify-content: flex-end;
+  // justify-content: center;
   // margin-left: auto;
+  width: 300px;
+  text-align: center;
+  margin: 0 auto;
   // margin-right: 500px;
   .welcome-user {
-    margin-top: 30px;
-    margin-right: 380px;
+    // margin-top: 30px;
+    // margin-right: 380px;
     color: #fff;
+    margin: 0 auto;
+    // border: 1px solid orange;
     position: relative;
     // border: 1px solid skyblue;
-    // width: 300px;
   }
 }
 
