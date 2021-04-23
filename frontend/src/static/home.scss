@@ -17,6 +17,13 @@ body {
     background-color: grey;
   }
 }
+
+.loading {
+  font-size: 5rem;
+  text-align: center;
+  color: #f1f1f1;
+  margin-top: 20%;
+}
 .home-container {
   // border: 1px solid red;
   // background: #212529;
@@ -34,6 +41,22 @@ body {
   // left: 0;
   // background: rgba(0, 0, 0, 0);
   background-color: red;
+}
+
+.chall-desc {
+  margin: 0 30px;
+}
+.chall-close-btn {
+  color: rgb(86, 100, 210);
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  box-shadow: 3px 3px 30px -13px #000;
+  cursor: pointer;
+  &:hover {
+    color: #ffa94d;
+    transition: all 0.2s ease-in-out;
+  }
 }
 
 .home-sidebar {
@@ -269,6 +292,7 @@ body {
   margin: 0 auto;
   animation-name: button-motion;
   animation-duration: 0.5s;
+
   @keyframes button-motion {
     0% {
       top: 0;
@@ -400,6 +424,7 @@ body {
   border-radius: 15px;
   box-shadow: 2px 5px 10px 2px rgba(0, 0, 0, 0.25);
   animation-name: challs-motion;
+
   animation-duration: 0.5s;
   @keyframes challs-motion {
     0% {
@@ -435,6 +460,17 @@ body {
     border: 1px solid #ffc9c9;
     border-radius: 10px;
     box-shadow: 3px 3px 30px -13px #000;
+    background: #fcc2d7;
+    opacity: 0.8;
+    &.correct {
+      border: 1px solid #6197ca;
+      background: #a5d8ff;
+      transition: all 0.5s ease-out;
+      &:hover {
+        background: #74c0fc;
+        opacity: 0.6;
+      }
+    }
     .challs-tag {
       border: none;
       background: #b197fc;
@@ -444,28 +480,46 @@ body {
       padding: 5px 10px;
       text-align: center;
       position: absolute;
-      margin-top: 70px;
+      // margin-top: 70px;
       border-radius: 10px;
     }
-    .challs-title {
-      color: #f1f1f1;
+    .challs-point {
       font-weight: bold;
-      width: 200px;
+      // color: #f1f1f1;
+      // width: 200px;
+      color: #000;
+      // border: 1px solid red;
+      text-align: center;
+      // border: 1px solid red;
+    }
+    .challs-title {
+      // color: #f1f1f1;
+      color: #000;
+      font-weight: bold;
+      // width: 200px;
+      width: 100%;
       text-align: center;
       // border: 1px solid red;
     }
     &:hover {
-      background: #fcc2d7;
+      background: #faa2c1;
       opacity: 0.7;
       border: none;
       transition: all 0.3s ease-in-out;
       .challs-title {
         color: #000;
         transition: all 0.3s ease-out;
+        opacity: 0.6;
       }
       .challs-tag {
         color: #000;
         transition: all 0.3s ease-out;
+        opacity: 0.6;
+      }
+      .challs-point {
+        color: #000;
+        transition: all 0.3s ease-out;
+        opacity: 0.6;
       }
     }
   }

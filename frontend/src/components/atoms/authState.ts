@@ -26,6 +26,48 @@ export const modalLState = atom({
   default: false,
 })
 
+export const challsModalState = atom({
+  key: 'challsModalState',
+  default: false,
+})
+
+export const challsListState = atom({
+  key: 'challsListState',
+  default: [],
+})
+
+export const challIdState = atom({
+  key: 'challIdState',
+  default: [],
+})
+export const challTitleState = atom({
+  key: 'challTitleState',
+  default: [],
+})
+export const challPointState = atom({
+  key: 'challPointState',
+  default: [],
+})
+export const challCategoryState = atom({
+  key: 'challCategoryState',
+  default: [],
+})
+export const challDescState = atom({
+  key: 'challDescState',
+  default: [],
+})
+
+export const challFlagState = atom({
+  key: 'challFlagState',
+  default: [],
+})
+
+export const solvedState = atom({
+  key: 'solvedState',
+  default: false,
+})
+
+
 
 export type RegisterProps = {
   id: any;

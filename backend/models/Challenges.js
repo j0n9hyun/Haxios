@@ -22,6 +22,9 @@ const challsSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  flag: {
+    type: String,
+  },
 });
 
 const Challenges = mongoose.model('Challenges', challsSchema);

@@ -5321,10 +5321,12 @@ readers do not read off random characters that represent icons */
 
 .fa-times:before {
   content: '\f00d';
+  font-size: 2rem;
 }
 
 .fa-times-circle:before {
   content: '\f057';
+  font-size: 2rem;
 }
 
 .fa-tint:before {

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useHistory, useLocation, withRouter } from 'react-router-dom';
+import React from 'react';
+import { useHistory, useLocation, withRouter } from 'react-router-dom';
 import title from '../../static/haxios.svg';
 import '../../static/home.scss';
 import '../../static/font/css/all.css';

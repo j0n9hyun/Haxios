@@ -42,7 +42,7 @@ export default function Auth(
           }
         }
       }
-    }, []);
+    }, [history, isAdmin, isAuth, modalIsOpenL, setIsLogin, setModalIsOpenL]);
     return <SpecificFunction />;
   }
   return Authentication;

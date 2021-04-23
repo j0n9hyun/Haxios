@@ -1,29 +1,43 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useHistory, withRouter } from 'react-router-dom';
-import title from '../../static/haxios.svg';
+import React, { useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 import '../../static/home.scss';
 import Navbar from '../Nav';
 import Menu from '../menu';
-import axios from 'axios';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
-  authenticationSeletor,
   challengesSelector,
-  challengesState,
+  challsModalState,
+  challIdState,
+  challsListState,
+  challTitleState,
+  challPointState,
+  challCategoryState,
+  challDescState,
+  challFlagState,
+  solvedState,
 } from '../atoms/authState';
+import ChallengesModal from './challengesModal';
 
 const Challenges = (props: any) => {
-  const [challsList, setChallsList] = useState([]);
+  const [challsList, setChallsList] = useRecoilState(challsListState);
   const checkedChalls = useRecoilValue(challengesSelector);
-  const history = useHistory();
-  const { isAuth, isAdmin } = useRecoilValue(authenticationSeletor);
+  const [challsModal, setChallsModal] = useRecoilState(challsModalState);
+  const [challId, setChallId] = useRecoilState(challIdState);
+  const [challTitle, setChallTitle] = useRecoilState(challTitleState);
+  const [challPoint, setChallPoint] = useRecoilState(challPointState);
+  const [challCategory, setChallCategory] = useRecoilState(challCategoryState);
+  const [challDesc, setChallDesc] = useRecoilState(challDescState);
+  const [challFlag, setChallFlag] = useRecoilState(challFlagState);
+
+  const onClickTitle = (e: any) => {
+    setChallsModal(!challsModal);
+  };
+
+  const solved = useRecoilValue(solvedState);
+
   useEffect(() => {
-    if (!isAuth) {
-      history.push('/');
-    } else {
-      setChallsList(checkedChalls);
-    }
-  }, []);
+    setChallsList(checkedChalls);
+  }, [checkedChalls, setChallsList]);
 
   return (
     <>
@@ -34,34 +48,39 @@ const Challenges = (props: any) => {
           ? challsList.map((v: any) => (
               <div
                 className={
-                  checkedChalls === true ? 'challs-box-correct' : 'challs-box'
+                  v._id === challId && solved === true
+                    ? 'challs-box correct'
+                    : 'challs-box'
                 }
+                onClick={() => {
+                  setChallId(v._id);
+                  setChallTitle(v.title);
+                  setChallPoint(v.point);
+                  setChallCategory(v.category);
+                  setChallDesc(v.description);
+                  setChallFlag(v.flag);
+                  setChallsModal(!challsModal);
+                }}
+                key={v._id}
               >
-                <div className='challs-title'>
-                  {v.title} {v.point}
-                </div>
+                <div className='challs-title'>{v.title}</div>
+                <div className='challs-point'>{v.point}</div>
                 <div className='challs-tag'>{v.category}</div>
+                {/* <div>{v._id}</div> */}
               </div>
             ))
           : null}
-        {/* <div className='challs-box'>
-          <div className='challs-title'>
-            어쩌고어쩌고어쩌고어쩌고어쩌고어쩌고
-          </div>
-          <div className='challs-tag'>Rev</div>
-        </div>
-        <div className='challs-box'>
-          <div className='challs-title'>문제1</div>
-        </div>
-        <div className='challs-box-correct'>
-          <div className='challs-title'>문제1</div>
-        </div>
-        <div className='challs-box'>
-          <div className='challs-title'>문제1</div>
-        </div>
-        <div className='challs-box'>
-          <div className='challs-title'>문제1</div>
-        </div> */}
+        {challsModal && (
+          <ChallengesModal
+            handleModal={onClickTitle}
+            challId={challId}
+            challTitle={challTitle}
+            challPoint={challPoint}
+            challCategory={challCategory}
+            challDesc={challDesc}
+            challFlag={challFlag}
+          />
+        )}
       </div>
     </>
   );
