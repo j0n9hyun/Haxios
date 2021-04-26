@@ -64,31 +64,14 @@ router.get('/api/users/logout', auth, (req, res) => {
   });
 });
 
-router.get('/api/users/test', auth, (req, res) => {
-  const chall = new Challenge(req.body);
-  chall.save((err, uesrInfo) => {
-    if (err) return res.json({ success: false, err });
-    return res.status(200).json({ success: true });
-  });
-  console.log(chall);
-});
+// router.post('/api/users/chall', (req, res) => {
+//   const chall = new Challenge(req.body);
 
-router.post('/api/users/chall', (req, res) => {
-  const chall = new Challenge(req.body);
-
-  chall.save((err, uesrInfo) => {
-    if (err) return res.json({ success: false, err });
-    return res.status(200).json({ success: true });
-  });
-  // res.status(200).json({
-  //   title: chall.title,
-  //   category: chall.category,
-  //   description: chall.description,
-  //   point: chall.point,
-  //   flag: chall.title,
-  //   solves: chall.solves,
-  // });
-});
+//   chall.save((err, uesrInfo) => {
+//     if (err) return res.json({ success: false, err });
+//     return res.status(200).json({ success: true });
+//   });
+// });
 
 router.post('/api/users/challs', (req, res) => {
   const challs = new Challenges(req.body);
@@ -98,7 +81,9 @@ router.post('/api/users/challs', (req, res) => {
   console.log(challs);
 });
 
-router.get('/api/users/challs', auth, (req, res) => {
+router.get('/api/users/challs', (req, res) => {
+  // Challenges.find((v) => v.id);
+  // const todo = challs.find((todo) => todo.id == req.params.id);
   Challenges.find({}, function (err, cb) {
     if (!err) {
       res.status(200).json(cb);
@@ -107,5 +92,35 @@ router.get('/api/users/challs', auth, (req, res) => {
     }
   });
 });
+router.patch('/api/users/challs/:_id', (req, res) => {
+  Challenges.findOneAndUpdate(
+    { _id: req.params._id },
+    { isSolved: 1 },
+    function (err, cb) {
+      // const filtering = cb.filter(
+      //   (v) => v.challId === parseInt(req.params.challId)
+      // );
+      if (!err) {
+        res.status(200).json({ isSolved: true });
+        // res.status(200).json(filtering);
+      } else {
+        res.send('실패스');
+      }
+    }
+  );
+});
+
+// router.post('/api/users/challs/:id', auth, (req, res) => {
+//   Challenges.find({}, function (err, cb) {
+//     console.log(req.params.id);
+//     cb.filter((chall) => chall.id);
+//     // cb.find((chall) => console.log(chall._id));
+//     if (!err) {
+//       res.status(200).json(cb);
+//     } else {
+//       throw err;
+//     }
+//   });
+// });
 
 module.exports = router;

@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 
 const challsSchema = mongoose.Schema({
+  challId: {
+    type: Number,
+    unique: true,
+    index: true,
+    default: 1,
+  },
   title: {
     type: String,
     maxlength: 30,
@@ -19,6 +25,10 @@ const challsSchema = mongoose.Schema({
     default: 0,
   },
   solves: {
+    type: Number,
+    default: 0,
+  },
+  isSolved: {
     type: Number,
     default: 0,
   },
