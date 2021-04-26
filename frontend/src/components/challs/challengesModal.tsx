@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../static/home.scss';
 import { withRouter } from 'react-router-dom';
 import title from '../../static/title.svg';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { challsModalState, solvedState } from '../atoms/authState';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import {
+  challengesSelector,
+  challsModalState,
+  solvedState,
+} from '../atoms/authState';
+import axios from 'axios';
 
 const ChallengeModal = ({
   handleModal,
@@ -16,27 +21,44 @@ const ChallengeModal = ({
 }: any) => {
   const [answer, setAnswer] = useState('');
   const setSolved = useSetRecoilState(solvedState);
-  const [test, setTest] = useRecoilState(challsModalState);
+  const [challsModal, setChallsModal] = useRecoilState(challsModalState);
+  const checkedChalls = useRecoilValue(challengesSelector);
+
+  async function patchProb() {
+    const response: any = await axios.patch(`api/users/challs/${challId}`);
+    return response;
+  }
 
   const onChangeFlag = (e: any) => {
-    setAnswer(e.currentTarget.value);
-    console.log(e.currentTarget.value);
+    setAnswer(e.target.value);
   };
   const onSubmit = (e: any) => {
     e.preventDefault();
-    console.log(e);
+
     if (challFlag === answer) {
-      setSolved(true);
-      setTest(!test);
+      window.location.reload();
+      setSolved(1);
+      patchProb();
+      setChallsModal(!challsModal);
     } else {
+      setSolved(0);
       console.log('틀림');
     }
   };
   const onKeypress = (e: any) => {
     if (e.key === 'Escape') {
-      setTest(!test);
+      setChallsModal(!challsModal);
     }
   };
+
+  // useEffect(() => {
+  //   const call = async () => {
+  //     const response = await axios.patch(`api/users/challs/${challId}`, {
+  //       isSolved: 1,
+  //     });
+  //   };
+  //   call();
+  // }, []);
 
   return (
     <>
@@ -53,7 +75,7 @@ const ChallengeModal = ({
               <i
                 className='fas fa-times'
                 onClick={() => {
-                  setTest(!test);
+                  setChallsModal(!challsModal);
                 }}
               />
             </div>
@@ -70,6 +92,7 @@ const ChallengeModal = ({
                 <input
                   type='text'
                   placeholder='flag'
+                  value={answer}
                   onChange={onChangeFlag}
                   onKeyDown={onKeypress}
                 />

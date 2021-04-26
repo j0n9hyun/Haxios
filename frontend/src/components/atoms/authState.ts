@@ -64,7 +64,7 @@ export const challFlagState = atom({
 
 export const solvedState = atom({
   key: 'solvedState',
-  default: false,
+  default: 0,
 })
 
 
@@ -90,6 +90,8 @@ export async function submitState(id: any, pw: any) {
   });
   return response.data;
 }
+
+
 
 export async function logoutState() {
   const response: any = await axios.get('api/users/logout');

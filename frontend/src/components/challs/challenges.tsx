@@ -48,9 +48,7 @@ const Challenges = (props: any) => {
           ? challsList.map((v: any) => (
               <div
                 className={
-                  v._id === challId && solved === true
-                    ? 'challs-box correct'
-                    : 'challs-box'
+                  v.isSolved === 1 ? 'challs-box correct' : 'challs-box'
                 }
                 onClick={() => {
                   setChallId(v._id);
