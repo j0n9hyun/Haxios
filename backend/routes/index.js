@@ -74,7 +74,7 @@ router.get('/api/users/logout', auth, (req, res) => {
 //   });
 // });
 
-router.post('/api/users/challs', (req, res) => {
+router.post('/api/users/challs', auth, (req, res) => {
   const challs = new Challenges(req.body);
   if (res.status(200).json({ success: true })) {
     challs.save();
@@ -82,7 +82,7 @@ router.post('/api/users/challs', (req, res) => {
   console.log(challs);
 });
 
-router.get('/api/users/challs', (req, res) => {
+router.get('/api/users/challs', auth, (req, res) => {
   // Challenges.find((v) => v.id);
   // const todo = challs.find((todo) => todo.id == req.params.id);
   Challenges.find({}, function (err, cb) {
@@ -108,7 +108,7 @@ router.patch('/api/users/challs/:_id', (req, res) => {
   );
 });
 
-router.post(`/api/users/submit/:_id`, (req, res) => {
+router.post(`/api/users/submit/:_id`, auth, (req, res) => {
   let test = req.body.solved;
   console.log(test);
   Challenges.find({}, function (err, cb) {

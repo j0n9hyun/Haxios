@@ -61,7 +61,7 @@ const ChallengeModal = ({
 
   const [disabled, setDisabled] = useState(false);
 
-  const asdasd = (document.getElementById('hou').disabled = true);
+  // const asdasd = (document.getElementById('hou').disabled = true);
   // if (userId.solved.includes(challId)) {
   //   setDisabled(true);
   // } else {
@@ -113,7 +113,7 @@ const ChallengeModal = ({
                     value={answer}
                     onChange={onChangeFlag}
                     onKeyDown={onKeypress}
-                    disabled={asdasd}
+                    // disabled={asdasd}
                     id='hou'
                   />
                 </div>
