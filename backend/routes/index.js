@@ -42,7 +42,7 @@ router.post('/api/users/login', function (req, res) {
   });
 });
 
-router.get('/api/users/auth', auth, (req, res) => {
+router.post('/api/users/auth', auth, (req, res) => {
   res.status(200).json({
     _id: req.user._id,
     isAdmin: req.user.role === 0 ? false : true,

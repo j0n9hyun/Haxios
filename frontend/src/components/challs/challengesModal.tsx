@@ -45,6 +45,7 @@ const ChallengeModal = ({
     if (challFlag === answer) {
       setSolved(1);
       // patchProb();
+      // alert('정답');
       test();
       setChallsModal(!challsModal);
       window.location.reload();

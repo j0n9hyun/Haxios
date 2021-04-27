@@ -127,7 +127,7 @@ export const challengesSelector = selector({
 export const authenticationSeletor = selector({
   key: 'testState',
   get: async() => {
-    const response: any = await axios.get('api/users/auth');
+    const response: any = await axios.post('api/users/auth');
     return response.data;
   },
   set: ({ set }, newValue) => {
