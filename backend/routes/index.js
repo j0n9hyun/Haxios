@@ -50,6 +50,7 @@ router.get('/api/users/auth', auth, (req, res) => {
     email: req.user.email,
     name: req.user.name,
     role: req.user.role,
+    solved: req.user.solved,
     // lastname: req.user.lastname,
     // image: req.user.image,
   });
@@ -75,7 +76,7 @@ router.get('/api/users/logout', auth, (req, res) => {
 
 router.post('/api/users/challs', (req, res) => {
   const challs = new Challenges(req.body);
-  if (res.status(200).json('하이')) {
+  if (res.status(200).json({ success: true })) {
     challs.save();
   }
   console.log(challs);
@@ -92,17 +93,14 @@ router.get('/api/users/challs', (req, res) => {
     }
   });
 });
+
 router.patch('/api/users/challs/:_id', (req, res) => {
   Challenges.findOneAndUpdate(
     { _id: req.params._id },
     { isSolved: 1 },
     function (err, cb) {
-      // const filtering = cb.filter(
-      //   (v) => v.challId === parseInt(req.params.challId)
-      // );
       if (!err) {
         res.status(200).json({ isSolved: true });
-        // res.status(200).json(filtering);
       } else {
         res.send('실패스');
       }
@@ -110,17 +108,48 @@ router.patch('/api/users/challs/:_id', (req, res) => {
   );
 });
 
-// router.post('/api/users/challs/:id', auth, (req, res) => {
-//   Challenges.find({}, function (err, cb) {
-//     console.log(req.params.id);
-//     cb.filter((chall) => chall.id);
-//     // cb.find((chall) => console.log(chall._id));
-//     if (!err) {
-//       res.status(200).json(cb);
-//     } else {
-//       throw err;
-//     }
+router.post(`/api/users/submit/:_id`, (req, res) => {
+  let test = req.body.solved;
+  console.log(test);
+  Challenges.find({}, function (err, cb) {
+    if (!err) {
+      console.log('challs find success');
+      // console.log(cb);
+    } else {
+      throw err;
+    }
+  });
+  User.findOneAndUpdate(
+    { _id: req.params._id },
+    { $push: { solved: test } }, // 유저에게 challId값 push
+    function (err, cb) {
+      if (!err) {
+        res.status(200).json(cb);
+      } else {
+        throw err;
+      }
+    }
+  );
+  // Challenges.findOneAndUpdate(
+  //   { _id: req.params._id },
+  //   { description: 'tt' },
+  //   function (err, cb) {
+  //     if (!err) {
+  //       res.status(200).json(cb);
+  //     } else {
+  //       throw err;
+  //     }
+  //   }
+  // );
+});
+
+// router.post('/api/users/submit', function (req, res) {
+//   const user = new User(req.body);
+//   user.save((err, uesrInfo) => {
+//     if (err) return res.json({ success: false, err });
+//     return res.status(200).json({ success: true });
 //   });
+//   console.log(user);
 // });
 
 module.exports = router;

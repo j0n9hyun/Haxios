@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import '../../static/home.scss';
 import { withRouter } from 'react-router-dom';
 import title from '../../static/title.svg';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
-  challengesSelector,
+  authenticationSeletor,
   challsModalState,
   solvedState,
 } from '../atoms/authState';
@@ -22,10 +22,18 @@ const ChallengeModal = ({
   const [answer, setAnswer] = useState('');
   const setSolved = useSetRecoilState(solvedState);
   const [challsModal, setChallsModal] = useRecoilState(challsModalState);
-  const checkedChalls = useRecoilValue(challengesSelector);
+  const userId = useRecoilValue(authenticationSeletor);
 
   async function patchProb() {
     const response: any = await axios.patch(`api/users/challs/${challId}`);
+    return response;
+  }
+
+  async function test() {
+    console.log(challId);
+    const response: any = await axios.post(`api/users/submit/${userId._id}`, {
+      solved: challId,
+    });
     return response;
   }
 
@@ -34,12 +42,12 @@ const ChallengeModal = ({
   };
   const onSubmit = (e: any) => {
     e.preventDefault();
-
     if (challFlag === answer) {
-      window.location.reload();
       setSolved(1);
-      patchProb();
+      // patchProb();
+      test();
       setChallsModal(!challsModal);
+      window.location.reload();
     } else {
       setSolved(0);
       console.log('틀림');
@@ -51,14 +59,16 @@ const ChallengeModal = ({
     }
   };
 
-  // useEffect(() => {
-  //   const call = async () => {
-  //     const response = await axios.patch(`api/users/challs/${challId}`, {
-  //       isSolved: 1,
-  //     });
-  //   };
-  //   call();
-  // }, []);
+  const [disabled, setDisabled] = useState(false);
+
+  const asdasd = (document.getElementById('hou').disabled = true);
+  // if (userId.solved.includes(challId)) {
+  //   setDisabled(true);
+  // } else {
+  //   setDisabled(false);
+  // }
+  const element = document.getElementById('hou');
+  // element = true;
 
   return (
     <>
@@ -87,18 +97,29 @@ const ChallengeModal = ({
             </div>
             <div className='chall-desc'>{challDesc}</div>
             <form className='signup-input' onSubmit={onSubmit}>
-              <div className='signup-input-text'>정답</div>
-              <div className='signup-input id'>
-                <input
-                  type='text'
-                  placeholder='flag'
-                  value={answer}
-                  onChange={onChangeFlag}
-                  onKeyDown={onKeypress}
-                />
-              </div>
-              <div className='signup-button'>
-                <button>제출</button>
+              <div
+                style={{
+                  // border: '1px solid red',
+                  position: 'absolute',
+                  bottom: '30px',
+                  width: '100%',
+                }}
+              >
+                <div className='signup-input-text'>정답</div>
+                <div className='signup-input id'>
+                  <input
+                    type='text'
+                    placeholder='flag'
+                    value={answer}
+                    onChange={onChangeFlag}
+                    onKeyDown={onKeypress}
+                    disabled={asdasd}
+                    id='hou'
+                  />
+                </div>
+                <div className='signup-button'>
+                  <button>제출</button>
+                </div>
               </div>
             </form>
           </div>

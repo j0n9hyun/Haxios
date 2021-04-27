@@ -33,6 +33,12 @@ const userSchema = mongoose.Schema({
   tokenExp: {
     type: Number,
   },
+  solved: {
+    type: Array,
+  },
+  last_updated: {
+    type: Date,
+  },
 });
 
 userSchema.pre('save', function (next) {

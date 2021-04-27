@@ -45,6 +45,22 @@ body {
 
 .chall-desc {
   margin: 0 30px;
+  height: 150px;
+  overflow-y: auto;
+  line-height: 1.5em;
+  white-space: break-spaces;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #d1d1d1; /*스크롤바의 색상*/
+    background-clip: padding-box;
+    border: 3px solid transparent;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
 }
 .chall-close-btn {
   color: rgb(86, 100, 210);
@@ -314,7 +330,6 @@ body {
   }
   .signup-wrapper {
     background: #f1f1f1;
-
     height: 500px;
     border: 1px solid #d1d1d1;
     border-radius: 15px;
