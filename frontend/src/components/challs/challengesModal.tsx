@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import '../../static/home.scss';
 import { withRouter } from 'react-router-dom';
 import title from '../../static/title.svg';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import {
+  selectorFamily,
+  useRecoilState,
+  useRecoilValue,
+  useSetRecoilState,
+} from 'recoil';
 import {
   authenticationSeletor,
   challsModalState,
   solvedState,
+  submitUserIdSelector,
+  authenticationState,
+  checkState,
 } from '../atoms/authState';
 import axios from 'axios';
 
@@ -20,37 +28,34 @@ const ChallengeModal = ({
   challFlag,
 }: any) => {
   const [answer, setAnswer] = useState('');
-  const setSolved = useSetRecoilState(solvedState);
+  const [solved, setSolved] = useRecoilState(solvedState);
   const [challsModal, setChallsModal] = useRecoilState(challsModalState);
   const userId = useRecoilValue(authenticationSeletor);
+  const [check, setCheck] = useRecoilState(checkState);
+  const ref = useRef<any>();
 
-  async function patchProb() {
-    const response: any = await axios.patch(`api/users/challs/${challId}`);
-    return response;
-  }
-
-  async function test() {
-    console.log(challId);
+  async function SubmitData() {
+    setSolved(1);
     const response: any = await axios.post(`api/users/submit/${userId._id}`, {
       solved: challId,
     });
-    return response;
+    setCheck({ checked: true, value: response.data });
+    return response.data;
   }
 
   const onChangeFlag = (e: any) => {
     setAnswer(e.target.value);
   };
+
   const onSubmit = (e: any) => {
     e.preventDefault();
     if (challFlag === answer) {
-      setSolved(1);
-      // patchProb();
-      // alert('정답');
-      test();
+      console.log('마즘');
+      SubmitData();
       setChallsModal(!challsModal);
+      // alert('정답');
       window.location.reload();
     } else {
-      setSolved(0);
       console.log('틀림');
     }
   };
@@ -59,17 +64,12 @@ const ChallengeModal = ({
       setChallsModal(!challsModal);
     }
   };
-
-  const [disabled, setDisabled] = useState(false);
-
-  // const asdasd = (document.getElementById('hou').disabled = true);
-  // if (userId.solved.includes(challId)) {
-  //   setDisabled(true);
-  // } else {
-  //   setDisabled(false);
-  // }
-  const element = document.getElementById('hou');
-  // element = true;
+  useEffect(() => {
+    ref.current.focus();
+    // if (challFlag === answer) {
+    //   SubmitData();
+    // }
+  }, []);
 
   return (
     <>
@@ -100,7 +100,6 @@ const ChallengeModal = ({
             <form className='signup-input' onSubmit={onSubmit}>
               <div
                 style={{
-                  // border: '1px solid red',
                   position: 'absolute',
                   bottom: '30px',
                   width: '100%',
@@ -114,8 +113,8 @@ const ChallengeModal = ({
                     value={answer}
                     onChange={onChangeFlag}
                     onKeyDown={onKeypress}
+                    ref={ref}
                     // disabled={asdasd}
-                    id='hou'
                   />
                 </div>
                 <div className='signup-button'>

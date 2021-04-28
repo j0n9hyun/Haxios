@@ -29,7 +29,7 @@ const Navbar = () => {
         setIsLogin(false);
         window.location.reload();
       } else {
-        alert('failed');
+        window.location.reload();
       }
     });
   };

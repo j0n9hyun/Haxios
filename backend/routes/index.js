@@ -124,7 +124,7 @@ router.post(`/api/users/submit/:_id`, auth, (req, res) => {
     { $push: { solved: test } }, // 유저에게 challId값 push
     function (err, cb) {
       if (!err) {
-        res.status(200).json(cb);
+        res.status(200).json(cb.solved);
       } else {
         throw err;
       }

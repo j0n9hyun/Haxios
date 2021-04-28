@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import '../../static/home.scss';
 import Navbar from '../Nav';
@@ -14,8 +14,9 @@ import {
   challCategoryState,
   challDescState,
   challFlagState,
-  solvedState,
   authenticationSeletor,
+  checkState,
+  authenticationState,
 } from '../atoms/authState';
 import ChallengesModal from './challengesModal';
 
@@ -29,24 +30,21 @@ const Challenges = (props: any) => {
   const [challCategory, setChallCategory] = useRecoilState(challCategoryState);
   const [challDesc, setChallDesc] = useRecoilState(challDescState);
   const [challFlag, setChallFlag] = useRecoilState(challFlagState);
+  const check = useRecoilValue(checkState);
+  // const [solved, setSolved] = useRecoilState(solvedState);
 
   const onClickTitle = (e: any) => {
     setChallsModal(!challsModal);
   };
 
-  const solved = useRecoilValue(solvedState);
   const userId = useRecoilValue(authenticationSeletor);
-  const [solveId, setSolveId] = useState('');
 
   useEffect(() => {
     setChallsList(checkedChalls);
-  }, []);
+    // authenticationState();
+  }, [checkedChalls, setChallsList]);
 
-  let aa = challsList.map((v: any) => v._id);
-  const r = aa.filter((x: string) => userId.solved.includes(x));
-
-  // console.log(aa[0]);
-  // console.log(userId.solved.includes(aa[0]));
+  // const arr = userId.solved;
 
   return (
     <>
@@ -57,7 +55,7 @@ const Challenges = (props: any) => {
           ? challsList.map((v: any) => (
               <div
                 className={
-                  userId.solved.includes(v._id)
+                  userId.solved.includes(v._id) || check.value.includes(v._id)
                     ? 'challs-box correct'
                     : 'challs-box'
                 }
@@ -75,9 +73,6 @@ const Challenges = (props: any) => {
                 <div className='challs-title'>{v.title}</div>
                 <div className='challs-point'>{v.point}</div>
                 <div className='challs-tag'>{v.category}</div>
-                {/* <div>
-                  {v._id} {userId.solved}
-                </div> */}
               </div>
             ))
           : null}
