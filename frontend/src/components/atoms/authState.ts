@@ -145,11 +145,11 @@ export const submitUserIdSelector = selectorFamily({
   key: 'submitUserIdSelector',
   get: (userId: any) => async() => {
     const challId = useRecoilValue(challIdState);
-    const setCheck = useSetRecoilState(checkState);
+    // const setCheck = useSetRecoilState(checkState);
     const response: any = await axios.post(`api/users/submit/${userId}`, {
       solved: challId
     });
-    setCheck({ checked: true, value: response.data });
+    // setCheck({ checked: true, value: response.data });
     return response.data;
   },
 })

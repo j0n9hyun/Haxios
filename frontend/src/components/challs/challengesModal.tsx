@@ -2,18 +2,11 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import '../../static/home.scss';
 import { withRouter } from 'react-router-dom';
 import title from '../../static/title.svg';
-import {
-  selectorFamily,
-  useRecoilState,
-  useRecoilValue,
-  useSetRecoilState,
-} from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   authenticationSeletor,
   challsModalState,
   solvedState,
-  submitUserIdSelector,
-  authenticationState,
   checkState,
 } from '../atoms/authState';
 import axios from 'axios';
@@ -28,10 +21,10 @@ const ChallengeModal = ({
   challFlag,
 }: any) => {
   const [answer, setAnswer] = useState('');
-  const [solved, setSolved] = useRecoilState(solvedState);
+  const setSolved = useSetRecoilState(solvedState);
   const [challsModal, setChallsModal] = useRecoilState(challsModalState);
   const userId = useRecoilValue(authenticationSeletor);
-  const [check, setCheck] = useRecoilState(checkState);
+  const setCheck = useSetRecoilState(checkState);
   const ref = useRef<any>();
 
   async function SubmitData() {
@@ -66,9 +59,13 @@ const ChallengeModal = ({
   };
   useEffect(() => {
     ref.current.focus();
-    // if (challFlag === answer) {
-    //   SubmitData();
+    // const scrollPos: any = sessionStorage.getItem('scrollPos');
+    // if (scrollPos !== null) {
+    //   window.scrollTo(0, scrollPos);
     // }
+    // window.addEventListener('scroll', () => {
+    //   sessionStorage.setItem('scrollPos', window.pageYOffset);
+    // });
   }, []);
 
   return (
