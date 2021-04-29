@@ -126,7 +126,8 @@ export async function challengesState() {
 export const challengesSelector = selector({
   key: 'challengesSelector',
   get: async() => {
-    const response: any = await axios.get('api/users/challs');
+    const response: any = await axios.get('api/users/challs')
+    // console.log(response.data.map((v: any) => v.title));
     return response.data;
   }
 })

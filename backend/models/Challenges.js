@@ -33,6 +33,7 @@ const challsSchema = mongoose.Schema({
   },
   flag: {
     type: String,
+    Options: { hidden: true },
   },
   isSolved: {
     type: Number,

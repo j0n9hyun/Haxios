@@ -18,8 +18,8 @@ const ChallengeModal = ({
   challPoint,
   challCategory,
   challDesc,
-  challFlag,
-}: any) => {
+}: // challFlag,
+any) => {
   const [answer, setAnswer] = useState('');
   const setSolved = useSetRecoilState(solvedState);
   const [challsModal, setChallsModal] = useRecoilState(challsModalState);
@@ -31,9 +31,15 @@ const ChallengeModal = ({
     setSolved(1);
     const response: any = await axios.post(`api/users/submit/${userId._id}`, {
       solved: challId,
+      flag: answer,
     });
     setCheck({ checked: true, value: response.data });
     return response.data;
+    // const response: any = await axios.post(`api/users/submit/${userId._id}`, {
+    //   solved: challId,
+    // });
+    // setCheck({ checked: true, value: response.data });
+    // return response.data;
   }
 
   const onChangeFlag = (e: any) => {
@@ -42,7 +48,7 @@ const ChallengeModal = ({
 
   const onSubmit = (e: any) => {
     e.preventDefault();
-    if (challFlag === answer) {
+    if (answer) {
       console.log('마즘');
       SubmitData();
       setChallsModal(!challsModal);
@@ -67,6 +73,9 @@ const ChallengeModal = ({
     //   sessionStorage.setItem('scrollPos', window.pageYOffset);
     // });
   }, []);
+
+  // let flag: any = document.getElementById('asdasd');
+  // console.log(flag?.value);
 
   return (
     <>
@@ -112,6 +121,7 @@ const ChallengeModal = ({
                     onKeyDown={onKeypress}
                     ref={ref}
                     // disabled={asdasd}
+                    id='asdasd'
                   />
                 </div>
                 <div className='signup-button'>

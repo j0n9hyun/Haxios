@@ -19,6 +19,7 @@ import {
   authenticationState,
 } from '../atoms/authState';
 import ChallengesModal from './challengesModal';
+import axios from 'axios';
 
 const Challenges = (props: any) => {
   const [challsList, setChallsList] = useRecoilState(challsListState);
@@ -29,7 +30,7 @@ const Challenges = (props: any) => {
   const [challPoint, setChallPoint] = useRecoilState(challPointState);
   const [challCategory, setChallCategory] = useRecoilState(challCategoryState);
   const [challDesc, setChallDesc] = useRecoilState(challDescState);
-  const [challFlag, setChallFlag] = useRecoilState(challFlagState);
+  // const [challFlag, setChallFlag] = useRecoilState(challFlagState);
   const check = useRecoilValue(checkState);
   // const [solved, setSolved] = useRecoilState(solvedState);
 
@@ -43,8 +44,6 @@ const Challenges = (props: any) => {
     setChallsList(checkedChalls);
     // authenticationState();
   }, [checkedChalls, setChallsList]);
-
-  // const arr = userId.solved;
 
   return (
     <>
@@ -65,7 +64,7 @@ const Challenges = (props: any) => {
                   setChallPoint(v.point);
                   setChallCategory(v.category);
                   setChallDesc(v.description);
-                  setChallFlag(v.flag);
+                  // setChallFlag(v.flag);
                   setChallsModal(!challsModal);
                 }}
                 key={v._id}
@@ -84,7 +83,7 @@ const Challenges = (props: any) => {
             challPoint={challPoint}
             challCategory={challCategory}
             challDesc={challDesc}
-            challFlag={challFlag}
+            // challFlag={challFlag}
           />
         )}
       </div>

@@ -79,19 +79,26 @@ router.post('/api/users/challs', auth, (req, res) => {
   if (res.status(200).json({ success: true })) {
     challs.save();
   }
-  console.log(challs);
+  // console.log(challs);
 });
 
 router.get('/api/users/challs', auth, (req, res) => {
+  const challs = new Challenges(req.body);
+  // console.log(challs);
   // Challenges.find((v) => v.id);
   // const todo = challs.find((todo) => todo.id == req.params.id);
-  Challenges.find({}, function (err, cb) {
-    if (!err) {
-      res.status(200).json(cb);
-    } else {
-      throw err;
+  Challenges.find(
+    {},
+    'title category description point solves',
+
+    function (err, cb) {
+      if (!err) {
+        res.status(200).send(cb);
+      } else {
+        throw err;
+      }
     }
-  });
+  );
 });
 
 router.patch('/api/users/challs/:_id', (req, res) => {
@@ -109,18 +116,25 @@ router.patch('/api/users/challs/:_id', (req, res) => {
 });
 
 router.post(`/api/users/submit/:_id`, auth, (req, res) => {
-  let test = req.body.solved;
-  console.log(test);
-  Challenges.find({}, function (err, cb) {
+  let challId = req.body.solved; // challId 문제번호
+  Challenges.find({}, 'id solves flag', function (err, cb) {
+    const filtering = cb.filter((v) => challId.includes(v._id));
     if (!err) {
-      console.log('challs find success');
-      // console.log(cb);
+      if (filtering) {
+        if (filtering[0].flag === req.body.flag) {
+          console.log('정답');
+          console.log(challId);
+        }
+      } else {
+        console.log('false');
+      }
     } else {
       throw err;
     }
   });
   User.findOneAndUpdate(
     { _id: req.params._id },
+    // { solved: test  }, // 유저에게 challId값 push
     { $push: { solved: test } }, // 유저에게 challId값 push
     function (err, cb) {
       if (!err) {
