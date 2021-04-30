@@ -155,19 +155,20 @@ body {
       padding: 15px;
       cursor: pointer;
       &.active {
-        color: #fff;
+        // color: #fff;
+        color: #bac8ff;
         // border-radius: 0 60px 60px 0;
         border-radius: 50px;
         width: 200px;
         transition: opacity 0.2s ease-in-out;
-        background: linear-gradient(
-          to right,
-          #8971ea,
-          #7f72ea,
-          #7574ea,
-          #6a75e9,
-          #5f76e8
-        );
+        // background: linear-gradient(
+        //   to right,
+        //   #8971ea,
+        //   #7f72ea,
+        //   #7574ea,
+        //   #6a75e9,
+        //   #5f76e8
+        // );
       }
 
       &:hover {
@@ -310,6 +311,20 @@ body {
   animation-name: button-motion;
   animation-duration: 0.5s;
 
+  &.fadeout {
+    animation-name: fadeout-motion;
+    animation-duration: 0.5s;
+    @keyframes fadeout-motion {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        top: 0;
+        opacity: 0;
+      }
+    }
+  }
+
   @keyframes button-motion {
     0% {
       top: 0;
@@ -336,6 +351,7 @@ body {
     border-radius: 15px;
     width: 500px;
     text-align: center;
+    opacity: 0.93;
     &.register {
       height: 700px;
     }
