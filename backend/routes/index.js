@@ -123,7 +123,16 @@ router.post(`/api/users/submit/:_id`, auth, (req, res) => {
       if (filtering) {
         if (filtering[0].flag === req.body.flag) {
           console.log('정답');
-          console.log(challId);
+          User.findOneAndUpdate(
+            { _id: req.params._id },
+            { $push: { solved: challId } },
+            function (err, cb) {
+              res.status(200).json({ success: true });
+              // console.log(cb);
+            }
+          );
+        } else {
+          res.send({ success: false });
         }
       } else {
         console.log('false');
@@ -132,38 +141,18 @@ router.post(`/api/users/submit/:_id`, auth, (req, res) => {
       throw err;
     }
   });
-  User.findOneAndUpdate(
-    { _id: req.params._id },
-    // { solved: test  }, // 유저에게 challId값 push
-    { $push: { solved: test } }, // 유저에게 challId값 push
-    function (err, cb) {
-      if (!err) {
-        res.status(200).json(cb.solved);
-      } else {
-        throw err;
-      }
-    }
-  );
-  // Challenges.findOneAndUpdate(
-  //   { _id: req.params._id },
-  //   { description: 'tt' },
-  //   function (err, cb) {
-  //     if (!err) {
-  //       res.status(200).json(cb);
-  //     } else {
-  //       throw err;
-  //     }
-  //   }
-  // );
 });
 
-// router.post('/api/users/submit', function (req, res) {
-//   const user = new User(req.body);
-//   user.save((err, uesrInfo) => {
-//     if (err) return res.json({ success: false, err });
-//     return res.status(200).json({ success: true });
-//   });
-//   console.log(user);
-// });
+// User.findOneAndUpdate(
+//   { _id: req.params._id },
+//   { $push: { solved: challId } }, // 유저에게 challId값 push
+//   function (err, cb) {
+//     if (!err) {
+//       res.status(200).json('ads');
+//     } else {
+//       throw err;
+//     }
+//   }
+//   );
 
 module.exports = router;

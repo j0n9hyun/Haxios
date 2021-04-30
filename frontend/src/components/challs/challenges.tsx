@@ -13,13 +13,10 @@ import {
   challPointState,
   challCategoryState,
   challDescState,
-  challFlagState,
   authenticationSeletor,
-  checkState,
-  authenticationState,
+  solvedState,
 } from '../atoms/authState';
 import ChallengesModal from './challengesModal';
-import axios from 'axios';
 
 const Challenges = (props: any) => {
   const [challsList, setChallsList] = useRecoilState(challsListState);
@@ -30,9 +27,7 @@ const Challenges = (props: any) => {
   const [challPoint, setChallPoint] = useRecoilState(challPointState);
   const [challCategory, setChallCategory] = useRecoilState(challCategoryState);
   const [challDesc, setChallDesc] = useRecoilState(challDescState);
-  // const [challFlag, setChallFlag] = useRecoilState(challFlagState);
-  const check = useRecoilValue(checkState);
-  // const [solved, setSolved] = useRecoilState(solvedState);
+  const solved = useRecoilValue(solvedState);
 
   const onClickTitle = (e: any) => {
     setChallsModal(!challsModal);
@@ -42,7 +37,6 @@ const Challenges = (props: any) => {
 
   useEffect(() => {
     setChallsList(checkedChalls);
-    // authenticationState();
   }, [checkedChalls, setChallsList]);
 
   return (
@@ -54,7 +48,7 @@ const Challenges = (props: any) => {
           ? challsList.map((v: any) => (
               <div
                 className={
-                  userId.solved.includes(v._id) || check.value.includes(v._id)
+                  userId.solved.includes(v._id) || solved.includes(v._id)
                     ? 'challs-box correct'
                     : 'challs-box'
                 }
@@ -64,7 +58,6 @@ const Challenges = (props: any) => {
                   setChallPoint(v.point);
                   setChallCategory(v.category);
                   setChallDesc(v.description);
-                  // setChallFlag(v.flag);
                   setChallsModal(!challsModal);
                 }}
                 key={v._id}

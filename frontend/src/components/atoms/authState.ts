@@ -1,4 +1,4 @@
-import { atom, selector, selectorFamily, useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
+import { atom, selector, selectorFamily, useRecoilValue, useResetRecoilState } from 'recoil';
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 export const idState = atom({
@@ -64,15 +64,7 @@ export const challFlagState = atom({
 
 export const solvedState = atom({
   key: 'solvedState',
-  default: 0
-})
-
-export const checkState = atom({
-  key: 'checkState',
-  default: {
-    checked: true,
-    value: '',
-  }
+  default: ['init']
 })
 
 

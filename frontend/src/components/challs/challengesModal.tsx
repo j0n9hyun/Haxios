@@ -1,15 +1,15 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../../static/home.scss';
 import { withRouter } from 'react-router-dom';
 import title from '../../static/title.svg';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   authenticationSeletor,
   challsModalState,
   solvedState,
-  checkState,
 } from '../atoms/authState';
 import axios from 'axios';
+import ChallengesEffect from './challengesEffect';
 
 const ChallengeModal = ({
   handleModal,
@@ -18,28 +18,29 @@ const ChallengeModal = ({
   challPoint,
   challCategory,
   challDesc,
-}: // challFlag,
-any) => {
+}: any) => {
   const [answer, setAnswer] = useState('');
-  const setSolved = useSetRecoilState(solvedState);
+  const [solved, setSolved] = useRecoilState(solvedState);
   const [challsModal, setChallsModal] = useRecoilState(challsModalState);
   const userId = useRecoilValue(authenticationSeletor);
-  const setCheck = useSetRecoilState(checkState);
   const ref = useRef<any>();
+  const [firework, setFirwork] = useState(false);
 
   async function SubmitData() {
-    setSolved(1);
-    const response: any = await axios.post(`api/users/submit/${userId._id}`, {
-      solved: challId,
-      flag: answer,
-    });
-    setCheck({ checked: true, value: response.data });
-    return response.data;
-    // const response: any = await axios.post(`api/users/submit/${userId._id}`, {
-    //   solved: challId,
-    // });
-    // setCheck({ checked: true, value: response.data });
-    // return response.data;
+    await axios
+      .post(`api/users/submit/${userId._id}`, {
+        solved: challId,
+        flag: answer,
+      })
+      .then((res: any) => {
+        if (res.data.success) {
+          setSolved(solved.concat(challId));
+          setFirwork(true);
+          // setChallsModal(!challsModal);
+        } else {
+          console.log('ㄲㅈ');
+        }
+      });
   }
 
   const onChangeFlag = (e: any) => {
@@ -48,38 +49,26 @@ any) => {
 
   const onSubmit = (e: any) => {
     e.preventDefault();
-    if (answer) {
-      console.log('마즘');
-      SubmitData();
-      setChallsModal(!challsModal);
-      // alert('정답');
-      window.location.reload();
-    } else {
-      console.log('틀림');
-    }
+    SubmitData();
   };
-  const onKeypress = (e: any) => {
-    if (e.key === 'Escape') {
-      setChallsModal(!challsModal);
-    }
-  };
+  // const onKeypress = (e: any) => {
+  //   if (e.key === 'Escape') {
+  //     setChallsModal(!challsModal);
+  //   }
+  // };
   useEffect(() => {
-    ref.current.focus();
-    // const scrollPos: any = sessionStorage.getItem('scrollPos');
-    // if (scrollPos !== null) {
-    //   window.scrollTo(0, scrollPos);
-    // }
-    // window.addEventListener('scroll', () => {
-    //   sessionStorage.setItem('scrollPos', window.pageYOffset);
-    // });
-  }, []);
+    // ref.current.focus();
 
-  // let flag: any = document.getElementById('asdasd');
-  // console.log(flag?.value);
+    document.addEventListener('keyup', function (e) {
+      if (e.key === 'Escape') {
+        setChallsModal(!challsModal);
+      }
+    });
+  }, [challsModal, setChallsModal]);
 
   return (
     <>
-      <div className='Signup' onClick={handleModal}>
+      <div className='Signup' onClick={handleModal} id='test'>
         <div
           className='signup-page-container'
           onClick={(e) => e.stopPropagation()}
@@ -111,22 +100,47 @@ any) => {
                   width: '100%',
                 }}
               >
-                <div className='signup-input-text'>정답</div>
-                <div className='signup-input id'>
-                  <input
-                    type='text'
-                    placeholder='flag'
-                    value={answer}
-                    onChange={onChangeFlag}
-                    onKeyDown={onKeypress}
-                    ref={ref}
-                    // disabled={asdasd}
-                    id='asdasd'
-                  />
-                </div>
-                <div className='signup-button'>
-                  <button>제출</button>
-                </div>
+                {firework === true || userId.solved.includes(challId) ? null : (
+                  <>
+                    <div className='signup-input-text'>정답</div>
+                    <div className='signup-input id'>
+                      <input
+                        type='text'
+                        placeholder='Haxios{...}'
+                        value={answer}
+                        onChange={onChangeFlag}
+                        ref={ref}
+                      />
+                    </div>
+                    <div className='signup-button'>
+                      <button>제출</button>
+                    </div>
+                  </>
+                )}
+                {
+                  firework && <ChallengesEffect />
+
+                  // (
+                  //   <div
+                  //     style={{
+                  //       position: 'absolute',
+                  //       top: '-100%',
+                  //       right: '50%',
+                  //       fontSize: '1.5rem',
+                  //       width: '300px',
+                  //       height: '50px',
+                  //       borderRadius: '10px',
+                  //       display: 'flex',
+                  //       alignItems: 'center',
+                  //       justifyContent: 'center',
+                  //       transform: 'translate(50%, 50%)',
+                  //       background: '#74c0fc',
+                  //     }}
+                  //   >
+                  //     정답이오리다
+                  //   </div>
+                  // )
+                }
               </div>
             </form>
           </div>
