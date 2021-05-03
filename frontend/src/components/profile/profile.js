@@ -14,7 +14,7 @@ const Profile = () => {
     //   const timestamp = (_) => new Date().getTime();
 
     //   // container
-    //   class Birthday {
+    //   className Birthday {
     //     constructor() {
     //       this.resize();
 
@@ -84,7 +84,7 @@ const Profile = () => {
     //     }
     //   }
 
-    //   class Firework {
+    //   className Firework {
     //     constructor(x, y, targetX, targetY, shade, offsprings) {
     //       this.dead = false;
     //       this.offsprings = offsprings;
@@ -179,99 +179,99 @@ const Profile = () => {
         {name} {solved}
       </div> */}
       <main>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
-        <div class='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
+        <div className='firework'></div>
       </main>
     </>
   );

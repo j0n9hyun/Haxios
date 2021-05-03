@@ -1,6 +1,6 @@
 import { atom, selector, selectorFamily, useRecoilValue, useResetRecoilState } from 'recoil';
 import axios from 'axios';
-axios.defaults.withCredentials = true;
+
 export const idState = atom({
   key: 'idState',
   default: '',
@@ -40,18 +40,22 @@ export const challIdState = atom({
   key: 'challIdState',
   default: [],
 })
+
 export const challTitleState = atom({
   key: 'challTitleState',
   default: [],
 })
+
 export const challPointState = atom({
   key: 'challPointState',
   default: [],
 })
+
 export const challCategoryState = atom({
   key: 'challCategoryState',
   default: [],
 })
+
 export const challDescState = atom({
   key: 'challDescState',
   default: [],
@@ -64,9 +68,13 @@ export const challFlagState = atom({
 
 export const solvedState = atom({
   key: 'solvedState',
-  default: ['init']
+  default: [''],
 })
 
+// export const 해결된_문제_상태 = atom({
+//   key: '해결된_문제_상태',
+//   default: false,
+// })
 
 export type RegisterProps = {
   id: string;
@@ -82,6 +90,7 @@ export function Reset() {
     resetPw,
   };
 }
+
 export async function submitState(id: any, pw: any) {
   const response: any = await axios.post('api/users/login', {
     email: id,
@@ -89,8 +98,6 @@ export async function submitState(id: any, pw: any) {
   });
   return response.data;
 }
-
-
 
 export async function logoutState() {
   const response: any = await axios.get('api/users/logout');
@@ -110,6 +117,7 @@ export async function authenticationState() {
   const response: any = await axios.post('api/users/auth');
   return response.data;
 }
+
 export async function challengesState() {
   const response: any = await axios.get('api/users/challs');
   return response.data;
@@ -119,7 +127,6 @@ export const challengesSelector = selector({
   key: 'challengesSelector',
   get: async() => {
     const response: any = await axios.get('api/users/challs')
-    // console.log(response.data.map((v: any) => v.title));
     return response.data;
   }
 })
@@ -134,17 +141,14 @@ export const authenticationSeletor = selector({
     set(solvedState, newValue);
   }
 });
+
 export const submitUserIdSelector = selectorFamily({
   key: 'submitUserIdSelector',
   get: (userId: any) => async() => {
     const challId = useRecoilValue(challIdState);
-    // const setCheck = useSetRecoilState(checkState);
     const response: any = await axios.post(`api/users/submit/${userId}`, {
       solved: challId
     });
-    // setCheck({ checked: true, value: response.data });
     return response.data;
   },
 })
-
-

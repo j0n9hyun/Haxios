@@ -302,6 +302,11 @@ body {
   }
   .link-to {
     margin-top: 30px;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+    &:hover {
+      color: rgb(86, 100, 210);
+    }
     a {
       text-decoration: none;
       color: #000;
@@ -417,7 +422,6 @@ body {
   border-radius: 15px;
   box-shadow: 2px 5px 10px 2px rgba(0, 0, 0, 0.25);
   animation-name: challs-motion;
-
   animation-duration: 0.5s;
   @keyframes challs-motion {
     0% {

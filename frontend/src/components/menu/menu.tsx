@@ -20,12 +20,11 @@ const Menu = () => {
 
   return (
     <>
-      <div className='home-container'>
+      <div>
         <div className='home-sidebar mini'>
           <div className='title-wrapper'>
             <img src={title} alt='' />
           </div>
-          {/* <div className='home-sidemenu'> */}
           <div className='home-category'>
             <ul>
               <li
