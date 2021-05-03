@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import '../../static/home.scss';
 import { withRouter } from 'react-router-dom';
 import title from '../../static/title.svg';
@@ -23,7 +23,6 @@ const ChallengeModal = ({
   const [solved, setSolved] = useRecoilState(solvedState);
   const [challsModal, setChallsModal] = useRecoilState(challsModalState);
   const userId = useRecoilValue(authenticationSeletor);
-  const ref = useRef<any>();
   const [firework, setFirwork] = useState(false);
 
   async function SubmitData() {
@@ -36,9 +35,8 @@ const ChallengeModal = ({
         if (res.data.success) {
           setSolved(solved.concat(challId));
           setFirwork(true);
-          // setChallsModal(!challsModal);
         } else {
-          console.log('ㄲㅈ');
+          console.log('땡');
         }
       });
   }
@@ -51,25 +49,28 @@ const ChallengeModal = ({
     e.preventDefault();
     SubmitData();
   };
-  // const onKeypress = (e: any) => {
-  //   if (e.key === 'Escape') {
-  //     setChallsModal(!challsModal);
-  //   }
-  // };
-  useEffect(() => {
-    // ref.current.focus();
 
+  const onClickCloseButton: any = useCallback(() => {
+    const closeMotion: any = document.getElementById('close');
+    setTimeout(() => {
+      setChallsModal(!challsModal);
+    }, 300);
+    closeMotion.classList.add('fadeout');
+  }, [challsModal, setChallsModal]);
+
+  useEffect(() => {
     document.addEventListener('keyup', function (e) {
       if (e.key === 'Escape') {
-        setChallsModal(!challsModal);
+        onClickCloseButton();
       }
     });
-  }, [challsModal, setChallsModal]);
+  }, [challsModal, setChallsModal, onClickCloseButton]);
 
   return (
     <>
       <div className='Signup' onClick={handleModal} id='test'>
         <div
+          id='close'
           className='signup-page-container'
           onClick={(e) => e.stopPropagation()}
         >
@@ -78,12 +79,7 @@ const ChallengeModal = ({
               <img src={title} alt='' />
             </figure>
             <div className='chall-close-btn'>
-              <i
-                className='fas fa-times'
-                onClick={() => {
-                  setChallsModal(!challsModal);
-                }}
-              />
+              <i className='fas fa-times' onClick={onClickCloseButton} />
             </div>
             <div className='signup-header'>
               {challTitle}
@@ -100,16 +96,28 @@ const ChallengeModal = ({
                   width: '100%',
                 }}
               >
-                {firework === true || userId.solved.includes(challId) ? null : (
+                {firework === true ||
+                userId.solved.includes(challId) ||
+                solved.includes(challId) ? (
+                  <>
+                    <div className='signup-input-text'>정답</div>
+                    <div className='signup-input id'>
+                      <input
+                        type='text'
+                        placeholder='이미 완료한 문제입니다.'
+                        disabled
+                      />
+                    </div>
+                  </>
+                ) : (
                   <>
                     <div className='signup-input-text'>정답</div>
                     <div className='signup-input id'>
                       <input
                         type='text'
                         placeholder='Haxios{...}'
-                        value={answer}
+                        value={answer || ''}
                         onChange={onChangeFlag}
-                        ref={ref}
                       />
                     </div>
                     <div className='signup-button'>
@@ -117,30 +125,7 @@ const ChallengeModal = ({
                     </div>
                   </>
                 )}
-                {
-                  firework && <ChallengesEffect />
-
-                  // (
-                  //   <div
-                  //     style={{
-                  //       position: 'absolute',
-                  //       top: '-100%',
-                  //       right: '50%',
-                  //       fontSize: '1.5rem',
-                  //       width: '300px',
-                  //       height: '50px',
-                  //       borderRadius: '10px',
-                  //       display: 'flex',
-                  //       alignItems: 'center',
-                  //       justifyContent: 'center',
-                  //       transform: 'translate(50%, 50%)',
-                  //       background: '#74c0fc',
-                  //     }}
-                  //   >
-                  //     정답이오리다
-                  //   </div>
-                  // )
-                }
+                {firework && <ChallengesEffect />}
               </div>
             </form>
           </div>
