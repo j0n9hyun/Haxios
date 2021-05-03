@@ -69,9 +69,9 @@ export const solvedState = atom({
 
 
 export type RegisterProps = {
-  id: any;
-  pw: any;
-  name: any;
+  id: string;
+  pw: string;
+  name: string;
 };
 
 export function Reset() {
