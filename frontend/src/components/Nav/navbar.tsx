@@ -16,11 +16,11 @@ const Navbar = () => {
   const [modalIsOpen, setModalIsOpen] = useRecoilState(modalState);
   const [modalIsOpenL, setModalIsOpenL] = useRecoilState(modalLState);
 
-  const handleModal = (e: any) => {
+  const handleModal = () => {
     setModalIsOpen(!modalIsOpen);
   };
 
-  const handleModalLogin = (e: any) => {
+  const handleModalLogin = () => {
     setModalIsOpenL(!modalIsOpenL);
   };
   const onClickLogout = () => {

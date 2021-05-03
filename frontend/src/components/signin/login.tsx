@@ -1,13 +1,23 @@
 import React, { useEffect, useRef } from 'react';
 import '../../static/home.scss';
 import { withRouter } from 'react-router-dom';
-import { idState, pwState, Reset, submitState } from '../atoms/authState';
+import {
+  idState,
+  modalLState,
+  modalState,
+  pwState,
+  Reset,
+  submitState,
+} from '../atoms/authState';
 import { useRecoilState } from 'recoil';
 import title from '../../static/title.svg';
 
-const Login = ({ handleModalLogin, modalIsOpenL }: any) => {
+const Login = ({ handleModalLogin }: any) => {
   const [id, setId] = useRecoilState(idState);
   const [pw, setPw] = useRecoilState(pwState);
+  const [modalIsOpen, setModalIsOpen] = useRecoilState(modalState);
+  const [modalIsOpenL, setModalIsOpenL] = useRecoilState(modalLState);
+
   const { resetId, resetPw } = Reset();
   const ref = useRef<any>();
   const onChangeId = (e: any) => {
@@ -29,6 +39,11 @@ const Login = ({ handleModalLogin, modalIsOpenL }: any) => {
     } catch {
       console.log('err');
     }
+  };
+
+  const onClickRegister = () => {
+    setModalIsOpen(!modalIsOpen);
+    setModalIsOpenL(!modalIsOpenL);
   };
 
   useEffect(() => {
@@ -72,6 +87,10 @@ const Login = ({ handleModalLogin, modalIsOpenL }: any) => {
               </div>
               <div className='signup-button'>
                 <button>로그인</button>
+                <br />
+                <div className='link-to'>
+                  <div onClick={onClickRegister}>회원가입</div>
+                </div>
               </div>
             </form>
           </div>
