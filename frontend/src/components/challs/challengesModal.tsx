@@ -52,11 +52,12 @@ const ChallengeModal = ({
 
   const onClickCloseButton: any = useCallback(() => {
     const closeMotion: any = document.getElementById('close');
+    closeMotion?.classList?.add('fadeout');
     setTimeout(() => {
       setChallsModal(!challsModal);
+      closeMotion?.classList?.remove('fadeout');
     }, 300);
-    closeMotion.classList.add('fadeout');
-  }, [challsModal, setChallsModal]);
+  }, []);
 
   useEffect(() => {
     document.addEventListener('keyup', function (e) {
@@ -64,7 +65,7 @@ const ChallengeModal = ({
         onClickCloseButton();
       }
     });
-  }, [challsModal, setChallsModal, onClickCloseButton]);
+  }, []);
 
   return (
     <>
