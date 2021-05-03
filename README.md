@@ -28,9 +28,13 @@ Platform
 - Mongoose
 - SQLDBM
 
+<div align='center'>
+
 ![Home(WIP)](https://user-images.githubusercontent.com/16969364/115842724-110c5e80-a459-11eb-845a-bdb518a9990b.PNG)
 ![Login](https://user-images.githubusercontent.com/16969364/115842736-14074f00-a459-11eb-94e1-e638db400ff4.png)
 ![Register](https://user-images.githubusercontent.com/16969364/115842737-149fe580-a459-11eb-97ce-e4f2b0262660.png)
 ![Challenges](https://user-images.githubusercontent.com/16969364/115842739-15d11280-a459-11eb-8d0b-0b8cce0fe62b.PNG)
 ![Prob](https://user-images.githubusercontent.com/16969364/115842753-18cc0300-a459-11eb-9bfd-b25dc26d155c.PNG)
 ![challboard](https://user-images.githubusercontent.com/16969364/116835568-0b074200-abfe-11eb-8b92-c009ede27500.png)
+
+</div>
