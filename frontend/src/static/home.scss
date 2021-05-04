@@ -558,7 +558,6 @@ body {
   @media screen and(max-width: 768px) {
     right: 150px;
   }
-
   position: relative;
   margin-top: 60px;
   width: 50%;
@@ -566,7 +565,7 @@ body {
   height: 500px;
   margin-left: 300px;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   background: #313449;
   border-radius: 15px;
   box-shadow: 2px 5px 10px 2px rgba(0, 0, 0, 0.25);
@@ -574,7 +573,22 @@ body {
   animation-duration: 0.5s;
 
   .rule-title {
-    color: #f1f1f1;
+    color: #e1e1e1;
+    margin: 0 auto;
+    // border: 1px solid red;
     text-align: center;
+    li {
+      margin-top: 30px;
+      margin-left: 25px;
+      text-align: left;
+    }
+  }
+
+  .rule-welcome {
+    // border: 1px solid red;
+    padding-top: 50px;
+    height: 150px;
+    width: 90%;
+    margin: 0 auto;
   }
 }

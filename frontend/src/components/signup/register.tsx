@@ -42,7 +42,6 @@ const Register = ({ handleModal }: any) => {
       return false;
     }
     const call = async () => {
-      await axios;
       registerState(id, pw, name)
         .then((res) => {
           if (res.success) {
@@ -102,6 +101,7 @@ const Register = ({ handleModal }: any) => {
                   onChange={onChangePw}
                   value={pw || ''}
                   id='pwpw'
+                  minLength={5}
                 />
               </div>
               <div className='signup-input-text'>Confirm</div>
@@ -120,6 +120,7 @@ const Register = ({ handleModal }: any) => {
                   placeholder='닉네임'
                   onChange={onChangeName}
                   value={name || ''}
+                  maxLength={26}
                 />
               </div>
               <div className='signup-button'>

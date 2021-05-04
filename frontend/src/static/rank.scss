@@ -16,8 +16,6 @@
   min-width: 0;
   left: 275px;
   max-width: 100%;
-  height: 88vh;
-  // height: 300px;
   background: #313449;
   border-radius: 15px;
   box-shadow: 2px 5px 10px 2px rgba(0, 0, 0, 0.25);
@@ -35,9 +33,44 @@
 
 .rank-table {
   color: #fff;
-  border: 1px solid skyblue;
-  width: 700px;
-  height: 50vh;
+  .rank-trophy {
+    margin-top: 10px;
+    position: absolute;
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    padding-left: 5%;
+    margin-bottom: 30px;
+    &.silver-cup {
+      margin-top: 67px;
+      img {
+        @media screen and(max-width: 768px) {
+          margin-top: 40px;
+          margin-left: -10px;
+          width: 20px;
+        }
+      }
+    }
+    &.bronze-cup {
+      margin-top: 124px;
+      img {
+        @media screen and(max-width: 768px) {
+          margin-top: 70px;
+          margin-left: -10px;
+          width: 20px;
+        }
+      }
+    }
+    img {
+      @media screen and(max-width: 768px) {
+        margin-top: 10px;
+        margin-left: -10px;
+        width: 20px;
+      }
+      width: 40px;
+    }
+  }
+  width: 100%;
   .rank-head {
     display: flex;
     justify-content: space-around;
@@ -47,7 +80,7 @@
     height: 50px;
     .rank-title-text {
       color: #fff;
-      width: 50px;
+      width: 200px;
       text-align: center;
     }
   }
@@ -55,10 +88,13 @@
     display: flex;
     justify-content: space-around;
     color: #ffff;
-    padding: 15px 0;
+    padding: 20px 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    &.self {
+      color: #91a7ff;
+    }
     .rank-item {
-      width: 50px;
+      flex: 1;
       text-align: center;
       word-wrap: break-word;
     }

@@ -152,3 +152,16 @@ export const submitUserIdSelector = selectorFamily({
     return response.data;
   },
 })
+
+export const userListsSelector = selector({
+  key: 'userListsSelector',
+  get: async() => {
+    const response: any = await axios.post('api/users/list');
+    return response.data;
+  }
+})
+
+export async function userListsState() {
+  const response: any = await axios.post('api/users/list');
+  return response.data;
+} 
