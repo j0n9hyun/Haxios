@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { userListsState } from '../atoms/authState';
+import { useRecoilValue } from 'recoil';
+import { authenticationSeletor, userListsState } from '../atoms/authState';
 const RankUsers = () => {
-  // const userLists = useRecoilValue(userListsSelector);
+  const userId = useRecoilValue(authenticationSeletor);
   const [유저목록, 유저목록_설정] = useState([]);
   useEffect(() => {
     const call = async () => {
@@ -13,7 +14,10 @@ const RankUsers = () => {
   return (
     <>
       {유저목록.map((v: any, i: number) => (
-        <div className='rank-items' key={v._id}>
+        <div
+          className={userId._id === v._id ? 'rank-items self' : 'rank-items'}
+          key={v._id}
+        >
           <div className='rank-item'>{(i += 1)}</div>
           <div className='rank-item'>{v.name}</div>
           <div className='rank-item'>{v.totalPoint}</div>
