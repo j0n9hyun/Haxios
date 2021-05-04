@@ -6,6 +6,20 @@ const { Challenges } = require('../models/Challenges');
 const { auth } = require('../middleware/auth');
 const { json } = require('express');
 
+function getCurrentDate() {
+  var date = new Date();
+  var year = date.getFullYear();
+  var month = date.getMonth();
+  var today = date.getDate();
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var seconds = date.getSeconds();
+  var milliseconds = date.getMilliseconds();
+  return new Date(
+    Date.UTC(year, month, today, hours, minutes, seconds, milliseconds)
+  );
+}
+
 /* GET home page. */
 router.get('/', function (req, res) {
   res.send('index page');
@@ -44,6 +58,7 @@ router.post('/api/users/login', function (req, res) {
 
 router.post('/api/users/auth', auth, (req, res) => {
   res.status(200).json({
+    seq: req.user.seq,
     _id: req.user._id,
     isAdmin: req.user.role === 0 ? false : true,
     isAuth: true,
@@ -51,8 +66,8 @@ router.post('/api/users/auth', auth, (req, res) => {
     name: req.user.name,
     role: req.user.role,
     solved: req.user.solved,
-    // lastname: req.user.lastname,
-    // image: req.user.image,
+    totalPoint: req.user.totalPoint,
+    last_updated: req.user.last_updated,
   });
 });
 
@@ -64,15 +79,6 @@ router.get('/api/users/logout', auth, (req, res) => {
     });
   });
 });
-
-// router.post('/api/users/chall', (req, res) => {
-//   const chall = new Challenge(req.body);
-
-//   chall.save((err, uesrInfo) => {
-//     if (err) return res.json({ success: false, err });
-//     return res.status(200).json({ success: true });
-//   });
-// });
 
 router.post('/api/users/challs', auth, (req, res) => {
   const challs = new Challenges(req.body);
@@ -101,7 +107,7 @@ router.get('/api/users/challs', auth, (req, res) => {
   );
 });
 
-router.patch('/api/users/challs/:_id', (req, res) => {
+router.patch('/api/users/challs/:_id', auth, (req, res) => {
   Challenges.findOneAndUpdate(
     { _id: req.params._id },
     { isSolved: 1 },
@@ -117,7 +123,7 @@ router.patch('/api/users/challs/:_id', (req, res) => {
 
 router.post(`/api/users/submit/:_id`, auth, (req, res) => {
   let challId = req.body.solved; // challId 문제번호
-  Challenges.find({}, 'id solves flag', function (err, cb) {
+  Challenges.find({}, '_id solves flag point', function (err, cb) {
     const filtering = cb.filter((v) => challId.includes(v._id));
     if (!err) {
       if (filtering) {
@@ -125,10 +131,15 @@ router.post(`/api/users/submit/:_id`, auth, (req, res) => {
           console.log('정답');
           User.findOneAndUpdate(
             { _id: req.params._id },
-            { $push: { solved: challId } },
+            {
+              last_updated: getCurrentDate(),
+              $push: { solved: challId },
+              $inc: {
+                totalPoint: filtering[0].point,
+              },
+            },
             function (err, cb) {
               res.status(200).json({ success: true });
-              // console.log(cb);
             }
           );
         } else {
@@ -143,16 +154,10 @@ router.post(`/api/users/submit/:_id`, auth, (req, res) => {
   });
 });
 
-// User.findOneAndUpdate(
-//   { _id: req.params._id },
-//   { $push: { solved: challId } }, // 유저에게 challId값 push
-//   function (err, cb) {
-//     if (!err) {
-//       res.status(200).json('ads');
-//     } else {
-//       throw err;
-//     }
-//   }
-//   );
+router.post('/api/users/list', auth, (req, res) => {
+  User.find({}, null, { sort: { totalPoint: -1 } }, function (err, cb) {
+    res.status(200).json(cb);
+  });
+});
 
 module.exports = router;

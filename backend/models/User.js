@@ -1,13 +1,30 @@
 const mongoose = require('mongoose');
+const autoIncrement = require('mongoose-auto-increment');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-``;
 const saltRounds = 10;
 
+autoIncrement.initialize(mongoose);
+
+function getCurrentDate() {
+  var date = new Date();
+  var year = date.getFullYear();
+  var month = date.getMonth();
+  var today = date.getDate();
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var seconds = date.getSeconds();
+  var milliseconds = date.getMilliseconds();
+  return new Date(
+    Date.UTC(year, month, today, hours, minutes, seconds, milliseconds)
+  );
+}
+
 const userSchema = mongoose.Schema({
+  seq: { type: Number, default: 1 },
   name: {
     type: String,
-    maxlength: 50,
+    maxlength: 24,
   },
   email: {
     type: String,
@@ -17,10 +34,6 @@ const userSchema = mongoose.Schema({
   password: {
     type: String,
     minlength: 5,
-  },
-  lastname: {
-    type: String,
-    maxlength: 50,
   },
   role: {
     type: Number,
@@ -38,7 +51,19 @@ const userSchema = mongoose.Schema({
   },
   last_updated: {
     type: Date,
+    default: getCurrentDate(),
   },
+  totalPoint: {
+    type: Number,
+    default: 0,
+  },
+});
+
+userSchema.plugin(autoIncrement.plugin, {
+  model: 'User',
+  field: 'seq',
+  startAt: 1, //시작
+  increment: 1, // 증가
 });
 
 userSchema.pre('save', function (next) {
