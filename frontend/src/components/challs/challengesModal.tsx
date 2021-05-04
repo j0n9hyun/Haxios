@@ -57,7 +57,7 @@ const ChallengeModal = ({
       setChallsModal(!challsModal);
       closeMotion?.classList?.remove('fadeout');
     }, 300);
-  }, []);
+  }, [challsModal, setChallsModal]);
 
   useEffect(() => {
     document.addEventListener('keyup', function (e) {
@@ -65,11 +65,11 @@ const ChallengeModal = ({
         onClickCloseButton();
       }
     });
-  }, []);
+  }, [onClickCloseButton]);
 
   return (
     <>
-      <div className='Signup' onClick={handleModal} id='test'>
+      <div className='Signup' onClick={handleModal}>
         <div
           id='close'
           className='signup-page-container'
@@ -117,7 +117,6 @@ const ChallengeModal = ({
                       <input
                         type='text'
                         placeholder='Haxios{...}'
-                        value={answer || ''}
                         onChange={onChangeFlag}
                       />
                     </div>

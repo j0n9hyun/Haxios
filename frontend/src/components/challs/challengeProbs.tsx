@@ -39,28 +39,30 @@ const ChallengeProbs = () => {
   return (
     <div className='challs-wrapper'>
       {challsList.map instanceof Function
-        ? challsList.map((v: any) => (
-            <div
-              className={
-                userId.solved.includes(v._id) || solved.includes(v._id)
-                  ? 'challs-box correct'
-                  : 'challs-box'
-              }
-              onClick={() => {
-                setChallId(v._id);
-                setChallTitle(v.title);
-                setChallPoint(v.point);
-                setChallCategory(v.category);
-                setChallDesc(v.description);
-                setChallsModal(!challsModal);
-              }}
-              key={v._id}
-            >
-              <div className='challs-title'>{v.title}</div>
-              <div className='challs-point'>{v.point}</div>
-              <div className='challs-tag'>{v.category}</div>
-            </div>
-          ))
+        ? challsList.map(
+            ({ _id, title, point, category, description }: any) => (
+              <div
+                className={
+                  userId.solved.includes(_id) || solved.includes(_id)
+                    ? 'challs-box correct'
+                    : 'challs-box'
+                }
+                onClick={() => {
+                  setChallId(_id);
+                  setChallTitle(title);
+                  setChallPoint(point);
+                  setChallCategory(category);
+                  setChallDesc(description);
+                  setChallsModal(!challsModal);
+                }}
+                key={_id}
+              >
+                <div className='challs-title'>{title}</div>
+                <div className='challs-point'>{point}</div>
+                <div className='challs-tag'>{category}</div>
+              </div>
+            )
+          )
         : null}
       {challsModal && (
         <ChallengesModal
