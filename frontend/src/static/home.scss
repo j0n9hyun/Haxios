@@ -29,6 +29,7 @@ body {
 .chall-desc {
   margin: 0 30px;
   height: 150px;
+  // font-weight: bold;
   overflow-y: auto;
   line-height: 1.5em;
   white-space: break-spaces;
@@ -66,15 +67,24 @@ body {
       width: 130px;
     }
   }
-  width: 250px;
-  background: #313449;
+  width: 230px;
+  // background: #313449;
+  // background: #21222a;
+  // background: #2a2c38;
+  background: linear-gradient(to top, #262836, #2a2c38);
+  // border-top-right-radius: 15px;
+  border-radius: 15px;
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-bottom: 100px;
+  height: 98vh;
+
   overflow-y: auto;
   overflow-x: hidden;
   position: fixed;
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
   box-shadow: 3px 3px 30px -13px #000;
 
   &::-webkit-scrollbar {
@@ -93,9 +103,10 @@ body {
     text-align: center;
     padding: 15px;
     img {
+      width: 150px;
       @media screen and(max-width: 768px) {
         width: 110px;
-        font-size: 0.5em;
+        font-size: 0.4em;
       }
     }
   }
@@ -126,6 +137,7 @@ body {
     }
     font-size: 1.2em;
     li {
+      font-size: 0.95em;
       padding: 15px;
       cursor: pointer;
       &.active {
@@ -418,7 +430,8 @@ body {
   min-width: 0;
   left: 275px;
   max-width: 100%;
-  background: #313449;
+  // background: #22232e;
+  background: #2a2c38;
   border-radius: 15px;
   box-shadow: 2px 5px 10px 2px rgba(0, 0, 0, 0.25);
   animation-name: challs-motion;
@@ -444,20 +457,33 @@ body {
     justify-content: center;
     align-items: center;
     margin: 30px 20px 30px 20px;
-    width: 240px;
-    height: 150px;
+    width: 220px;
+    height: 140px;
     border: 1px solid #ffc9c9;
     border-radius: 10px;
     box-shadow: 3px 3px 30px -13px #000;
     background: #fcc2d7;
     opacity: 0.8;
+    animation-name: filtering-motion;
+    animation-duration: 0.8s;
     &.correct {
       border: 1px solid #6197ca;
       background: #a5d8ff;
       transition: all 0.5s ease-out;
+      animation-name: filtering-motion;
+      animation-duration: 0.8s;
+
       &:hover {
         background: #74c0fc;
         opacity: 0.6;
+      }
+      @keyframes filtering-motion {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 0.8;
+        }
       }
     }
     .challs-tag {
@@ -467,6 +493,7 @@ body {
       padding: 5px 10px;
       text-align: center;
       position: absolute;
+      font-size: 0.85em;
       border-radius: 10px;
     }
     .challs-point {
@@ -566,7 +593,7 @@ body {
   margin-left: 300px;
   display: flex;
   justify-content: left;
-  background: #313449;
+  background: #2a2c38;
   border-radius: 15px;
   box-shadow: 2px 5px 10px 2px rgba(0, 0, 0, 0.25);
   animation-name: challs-motion;

@@ -6,9 +6,11 @@ const RankUsers = () => {
   const [유저목록, 유저목록_설정] = useState([]);
   useEffect(() => {
     const call = async () => {
-      await userListsState().then((res: any) =>
-        유저목록_설정(res.filter((v: any) => v.totalPoint !== 0))
-      );
+      await userListsState()
+        ?.then((res: any) =>
+          유저목록_설정(res?.filter((v: any) => v.totalPoint !== 0))
+        )
+        .catch((e: any) => e);
     };
     call();
   }, []);

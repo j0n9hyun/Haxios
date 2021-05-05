@@ -157,7 +157,7 @@ router.post(`/api/users/submit/:_id`, auth, (req, res) => {
 router.post('/api/users/list', auth, (req, res) => {
   User.find(
     {},
-    null,
+    '_id name totalPoint last_updated',
     { sort: { totalPoint: -1, last_updated: 1 } },
     function (err, cb) {
       res.status(200).json(cb);
