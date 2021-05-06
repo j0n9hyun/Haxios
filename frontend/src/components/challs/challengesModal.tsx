@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import '../../static/home.scss';
 import { withRouter } from 'react-router-dom';
 import title from '../../static/title.svg';
@@ -24,6 +24,24 @@ const ChallengeModal = ({
   const [challsModal, setChallsModal] = useRecoilState(challsModalState);
   const userId = useRecoilValue(authenticationSeletor);
   const [firework, setFirwork] = useState(false);
+  const ref = useRef<any>();
+
+  const [중복제출, 중복제출_설정] = useState<any>(false);
+
+  let isSubmitted = false;
+
+  function oneTimeSubmit() {
+    if (isSubmitted === false) {
+      isSubmitted = true;
+      중복제출_설정(false);
+      SubmitData();
+    } else {
+      중복제출_설정(true);
+      setTimeout(() => {
+        중복제출_설정(false);
+      }, 2000);
+    }
+  }
 
   async function SubmitData() {
     await axios
@@ -40,14 +58,13 @@ const ChallengeModal = ({
         }
       });
   }
-
   const onChangeFlag = (e: any) => {
     setAnswer(e.target.value);
   };
 
   const onSubmit = (e: any) => {
     e.preventDefault();
-    SubmitData();
+    oneTimeSubmit();
   };
 
   const onClickCloseButton: any = useCallback(() => {
@@ -113,16 +130,34 @@ const ChallengeModal = ({
                 ) : (
                   <>
                     <div className='signup-input-text'>정답</div>
-                    <div className='signup-input id'>
-                      <input
-                        type='text'
-                        placeholder='Haxios{...}'
-                        onChange={onChangeFlag}
-                      />
-                    </div>
-                    <div className='signup-button'>
-                      <button>제출</button>
-                    </div>
+                    {중복제출 === true ? (
+                      <>
+                        <div className='signup-input id'>
+                          <input
+                            type='text'
+                            placeholder='Haxios{...}'
+                            disabled
+                          />
+                        </div>
+                        <div className='signup-button repeat'>
+                          <button disabled>서버를 괴롭히지 마세요.</button>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className='signup-input id'>
+                          <input
+                            type='text'
+                            placeholder='Haxios{...}'
+                            onChange={onChangeFlag}
+                            ref={ref}
+                          />
+                        </div>
+                        <div className='signup-button'>
+                          <button>제출</button>
+                        </div>
+                      </>
+                    )}
                   </>
                 )}
                 {firework && <ChallengesEffect />}

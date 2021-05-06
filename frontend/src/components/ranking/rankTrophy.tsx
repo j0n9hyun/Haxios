@@ -3,7 +3,7 @@ import goldcup from '../../static/goldcup.svg';
 import silvercup from '../../static/silvercup.svg';
 import bronzecup from '../../static/bronzecup.svg';
 
-const RankTrophy = () => {
+const RankTrophy = ({ 유저목록 }: any) => {
   return (
     <>
       <div className='rank-head'>
@@ -12,21 +12,25 @@ const RankTrophy = () => {
         <div className='rank-title-text'>점수</div>
         <div className='rank-title-text'>마지막 업데이트</div>
       </div>
-      <div className='rank-trophy'>
-        <figure>
-          <img src={goldcup} alt='' />
-        </figure>
-      </div>
-      <div className='rank-trophy silver-cup'>
-        <figure>
-          <img src={silvercup} alt='' />
-        </figure>
-      </div>
-      <div className='rank-trophy bronze-cup'>
-        <figure>
-          <img src={bronzecup} alt='' />
-        </figure>
-      </div>
+      {유저목록.length >= 3 ? (
+        <>
+          <div className='rank-trophy'>
+            <figure>
+              <img src={goldcup} alt='' />
+            </figure>
+          </div>
+          <div className='rank-trophy silver-cup'>
+            <figure>
+              <img src={silvercup} alt='' />
+            </figure>
+          </div>
+          <div className='rank-trophy bronze-cup'>
+            <figure>
+              <img src={bronzecup} alt='' />
+            </figure>
+          </div>
+        </>
+      ) : null}
     </>
   );
 };

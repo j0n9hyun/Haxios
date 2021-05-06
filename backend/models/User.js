@@ -48,6 +48,7 @@ const userSchema = mongoose.Schema({
   },
   solved: {
     type: Array,
+    unique: true,
   },
   last_updated: {
     type: Date,

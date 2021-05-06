@@ -3,7 +3,6 @@ import Navbar from '../Nav';
 import Menu from '../menu';
 import '../../static/rank.scss';
 import RankUsers from './rankUsers';
-import RankTrophy from './rankTrophy';
 import Loading from '../hoc/loading';
 
 const Rank = () => {
@@ -14,7 +13,6 @@ const Rank = () => {
       <div className='rank-wrapper'>
         <div className='rank-table'>
           <Suspense fallback={<Loading />}>
-            <RankTrophy />
             <RankUsers />
           </Suspense>
         </div>

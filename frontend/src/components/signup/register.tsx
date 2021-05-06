@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '../../static/home.scss';
-import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import title from '../../static/title.svg';
 import { modalLState, modalState, registerState } from '../atoms/authState';

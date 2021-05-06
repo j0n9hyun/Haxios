@@ -14,7 +14,6 @@ import {
   solvedState,
 } from '../atoms/authState';
 import ChallengesModal from './challengesModal';
-import ChallengesFiltering from './challengesFiltering';
 
 const ChallengeProbs = () => {
   const challsList = useRecoilValue(challsListState);

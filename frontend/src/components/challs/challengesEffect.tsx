@@ -6,7 +6,6 @@ const ChallengesEffect = () => {
     <>
       <div
         style={{
-          // position: 'aboslute',
           marginBottom: '15px',
           fontSize: '1.5em',
           transition: 'all .5s ease-out',

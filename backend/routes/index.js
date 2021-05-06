@@ -125,6 +125,7 @@ router.post(`/api/users/submit/:_id`, auth, (req, res) => {
   let challId = req.body.solved; // challId 문제번호
   Challenges.find({}, '_id solves flag point', function (err, cb) {
     const filtering = cb.filter((v) => challId.includes(v._id));
+
     if (!err) {
       if (filtering) {
         if (filtering[0].flag === req.body.flag) {
@@ -133,6 +134,7 @@ router.post(`/api/users/submit/:_id`, auth, (req, res) => {
             { _id: req.params._id },
             {
               last_updated: getCurrentDate(),
+              upsert: true,
               $push: { solved: challId },
               $inc: {
                 totalPoint: filtering[0].point,
