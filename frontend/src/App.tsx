@@ -16,7 +16,8 @@ function App() {
       <Switch>
         <RecoilRoot>
           <Suspense fallback={<Loading />}>
-            <Route path='/' exact component={Auth(Home, null)} />
+            {/* <Route path='/' exact component={Auth(Home, null)} /> */}
+            <Route path='/' exact component={Home} />
             {/* <Route path='/login' exact component={Auth(Login, false)} />
             <Route path='/register' exact component={Auth(Register, false)} /> */}
             <Route path='/profile' exact component={Auth(Profile, true)} />
