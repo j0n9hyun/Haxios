@@ -2,7 +2,8 @@
 html,
 body {
   height: 100%;
-  background: #212529;
+  // background: #212529;
+  background: #101421;
   overflow-y: auto;
   &::-webkit-scrollbar {
     width: 10px;
@@ -71,7 +72,9 @@ body {
   // background: #313449;
   // background: #21222a;
   // background: #2a2c38;
-  background: linear-gradient(to top, #262836, #2a2c38);
+  // background: linear-gradient(to top, #262836, #2a2c38);
+  background: linear-gradient(to top, #181924, #191f2c);
+  // background: #191f2c;
   // border-top-right-radius: 15px;
   border-radius: 15px;
   margin-top: 10px;
@@ -117,7 +120,8 @@ body {
     }
     width: 218px;
     height: 80%;
-    background: rgba(100, 108, 168, 0.8);
+    background: #191f2c;
+    // background: rgba(100, 108, 168, 0.8);
     border-radius: 15px;
     display: flex;
     flex-direction: column;
@@ -436,7 +440,8 @@ body {
   left: 275px;
   max-width: 100%;
   // background: #22232e;
-  background: #2a2c38;
+  // background: #2a2c38;
+  background: #191f2c;
   border-radius: 15px;
   box-shadow: 2px 5px 10px 2px rgba(0, 0, 0, 0.25);
   animation-name: challs-motion;
@@ -601,7 +606,8 @@ body {
   // margin-left: 280px;
   display: flex;
   justify-content: left;
-  background: #2a2c38;
+  background: #191f2c;
+  // background: #2a2c38;
   border-radius: 15px;
   box-shadow: 2px 5px 10px 2px rgba(0, 0, 0, 0.25);
   animation-name: challs-motion;
