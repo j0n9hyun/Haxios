@@ -24,6 +24,13 @@ mongoose
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+app.use(function (req, res, next) {
+  if (!req.secure) {
+    res.redirect('https://haxios.kr'+ req.url);
+  } else {
+    next();
+  }
+});
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
