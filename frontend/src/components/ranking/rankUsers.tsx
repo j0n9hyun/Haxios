@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { authenticationSeletor, userListsState } from '../atoms/authState';
 import RankTrophy from './rankTrophy';
+
 const RankUsers = () => {
   const userId = useRecoilValue(authenticationSeletor);
   const [유저목록, 유저목록_설정] = useState<any>([]);

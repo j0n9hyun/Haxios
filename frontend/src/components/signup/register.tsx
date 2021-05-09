@@ -110,6 +110,7 @@ const Register = ({ handleModal }: any) => {
                   placeholder='비밀번호 확인'
                   onChange={onChangeConfirmPw}
                   value={confirmPw}
+                  minLength={5}
                 />
               </div>
               <div className='signup-input-text'>Nickname</div>
@@ -119,7 +120,7 @@ const Register = ({ handleModal }: any) => {
                   placeholder='닉네임'
                   onChange={onChangeName}
                   value={name || ''}
-                  maxLength={26}
+                  maxLength={18}
                 />
               </div>
               <div className='signup-button'>

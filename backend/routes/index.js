@@ -5,7 +5,7 @@ const { Challenge } = require('../models/Challenge');
 const { Challenges } = require('../models/Challenges');
 const { auth } = require('../middleware/auth');
 const { json } = require('express');
-
+const path = require('path');
 function getCurrentDate() {
   var date = new Date();
   var year = date.getFullYear();
@@ -19,11 +19,6 @@ function getCurrentDate() {
     Date.UTC(year, month, today, hours, minutes, seconds, milliseconds)
   );
 }
-
-/* GET home page. */
-router.get('/', function (req, res) {
-  res.send('index page');
-});
 
 router.post('/api/users/register', function (req, res) {
   const user = new User(req.body);
@@ -165,6 +160,10 @@ router.post('/api/users/list', auth, (req, res) => {
       res.status(200).json(cb);
     }
   );
+});
+
+router.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, '../../frontend/build/index.html'));
 });
 
 module.exports = router;
