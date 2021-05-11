@@ -29,7 +29,6 @@ body {
 .box-wrapper {
   display: flex;
   align-items: center;
-  height: 40px;
 }
 
 .file-box {
@@ -70,8 +69,11 @@ body {
 }
 
 .chall-desc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 10px 30px;
-  height: 100px;
+  height: 80px;
   font-weight: 500;
   overflow-y: auto;
   line-height: 1.5em;
@@ -358,7 +360,8 @@ body {
   }
   .signup-wrapper {
     background: #f1f1f1;
-    height: 500px;
+    // height: 500px;
+    height: 470px;
     border: 1px solid #d1d1d1;
     border-radius: 15px;
     width: 500px;
@@ -469,6 +472,7 @@ body {
   box-shadow: 2px 5px 10px 2px rgba(0, 0, 0, 0.25);
   animation-name: challs-motion;
   animation-duration: 0.5s;
+
   @keyframes challs-motion {
     0% {
       opacity: 0;
@@ -498,6 +502,7 @@ body {
     opacity: 0.8;
     animation-name: filtering-motion;
     animation-duration: 0.8s;
+
     &.correct {
       border: 1px solid #6197ca;
       background: #a5d8ff;
@@ -509,13 +514,13 @@ body {
         background: #74c0fc;
         opacity: 0.6;
       }
-      @keyframes filtering-motion {
-        0% {
-          opacity: 0;
-        }
-        100% {
-          opacity: 0.8;
-        }
+    }
+    @keyframes filtering-motion {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 0.8;
       }
     }
     .challs-tag {
