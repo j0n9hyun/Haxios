@@ -101,7 +101,7 @@ const ChallengeModal = ({
           className='signup-page-container'
           onClick={(e) => e.stopPropagation()}
         >
-          <div className='signup-wrapper'>
+          <div className='signup-wrapper modal'>
             <figure style={{ marginTop: '20px' }}>
               <img src={title} alt='' />
             </figure>
