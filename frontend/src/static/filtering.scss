@@ -15,7 +15,6 @@
   height: 175px;
   max-width: 100%;
   background: #191f2c;
-  // background: #2a2c38;
   border-radius: 15px;
   box-shadow: 2px 5px 10px 2px rgba(0, 0, 0, 0.25);
   justify-content: center;
@@ -23,9 +22,7 @@
     @media screen and(max-width: 768px) {
       display: flex;
       justify-content: flex-start;
-      // flex-direction: column;
       width: 290px;
-      // border: 1px solid red;
     }
     display: flex;
     width: 630px;
@@ -37,8 +34,6 @@
         word-break: break-all;
         font-size: small;
       }
-
-      // border: 2px solid #d1d1d1;
       padding: 10px;
       border-radius: 15px;
       background: rgba(100, 108, 168, 0.8);
