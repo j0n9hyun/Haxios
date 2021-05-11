@@ -94,7 +94,7 @@ router.get('/api/users/challs', auth, (req, res) => {
   // const todo = challs.find((todo) => todo.id == req.params.id);
   Challenges.find(
     {},
-    'title category description point solves',
+    'title category description point solves file link',
 
     function (err, cb) {
       if (!err) {

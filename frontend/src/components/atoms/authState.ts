@@ -66,6 +66,15 @@ export const challFlagState = atom({
   default: [],
 })
 
+export const challFileState = atom({
+  key: 'challFileState',
+  default: '',
+})
+export const challLinkState = atom({
+  key: 'challLinkState',
+  default: '',
+})
+
 export const solvedState = atom({
   key: 'solvedState',
   default: [''],

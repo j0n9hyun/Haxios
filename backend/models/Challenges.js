@@ -39,6 +39,12 @@ const challsSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  file: {
+    type: String,
+  },
+  link: {
+    type: String,
+  },
 });
 
 const Challenges = mongoose.model('Challenges', challsSchema);

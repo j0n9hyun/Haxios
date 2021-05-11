@@ -12,6 +12,8 @@ import {
   challDescState,
   authenticationSeletor,
   solvedState,
+  challFileState,
+  challLinkState,
 } from '../atoms/authState';
 import ChallengesModal from './challengesModal';
 
@@ -23,6 +25,8 @@ const ChallengeProbs = () => {
   const [challPoint, setChallPoint] = useRecoilState(challPointState);
   const [challCategory, setChallCategory] = useRecoilState(challCategoryState);
   const [challDesc, setChallDesc] = useRecoilState(challDescState);
+  const [challFile, setChallFile] = useRecoilState(challFileState);
+  const [challLink, setChallLink] = useRecoilState(challLinkState);
   const solved = useRecoilValue(solvedState);
 
   const onClickTitle = (e: any) => {
@@ -36,7 +40,15 @@ const ChallengeProbs = () => {
       <div className='challs-wrapper'>
         {challsList.map instanceof Function
           ? challsList.map(
-              ({ _id, title, point, category, description }: any) => (
+              ({
+                _id,
+                title,
+                point,
+                category,
+                description,
+                file,
+                link,
+              }: any) => (
                 <div
                   className={
                     userId.solved.includes(_id) || solved.includes(_id)
@@ -50,6 +62,8 @@ const ChallengeProbs = () => {
                     setChallCategory(category);
                     setChallDesc(description);
                     setChallsModal(!challsModal);
+                    setChallFile(file);
+                    setChallLink(link);
                   }}
                   key={_id}
                 >
@@ -68,6 +82,8 @@ const ChallengeProbs = () => {
             challPoint={challPoint}
             challCategory={challCategory}
             challDesc={challDesc}
+            challFile={challFile}
+            challLink={challLink}
           />
         )}
       </div>
