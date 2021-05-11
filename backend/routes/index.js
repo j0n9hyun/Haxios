@@ -20,6 +20,10 @@ function getCurrentDate() {
   );
 }
 
+router.get('/', function (req, res) {
+  res.status(200).send('ㅎㅇ');
+});
+
 router.post('/api/users/register', function (req, res) {
   const user = new User(req.body);
   user.save((err, uesrInfo) => {
@@ -90,7 +94,7 @@ router.get('/api/users/challs', auth, (req, res) => {
   // const todo = challs.find((todo) => todo.id == req.params.id);
   Challenges.find(
     {},
-    'title category description point solves',
+    'title category description point solves file link',
 
     function (err, cb) {
       if (!err) {
@@ -162,8 +166,8 @@ router.post('/api/users/list', auth, (req, res) => {
   );
 });
 
-router.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, '../../frontend/build/index.html'));
-});
+// router.get('/*', function (req, res) {
+//   res.sendFile(path.join(__dirname, '../../frontend/build/index.html'));
+// });
 
 module.exports = router;

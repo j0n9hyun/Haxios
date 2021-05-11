@@ -4,39 +4,38 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('backend:server');
+const app = require('../app');
+const debug = require('debug')('backend:server');
 const http = require('http');
-const https = require("https")
-const fs = require("fs")
+const https = require('https');
+const fs = require('fs');
 
-var privateKey = fs.readFileSync("/etc/letsencrypt/live/haxios.kr/privkey.pem")
-var certificate = fs.readFileSync("/etc/letsencrypt/live/haxios.kr/cert.pem")
-var ca = fs.readFileSync("/etc/letsencrypt/live/haxios.kr/chain.pem")
-const credentials = { key: privateKey, cert: certificate, ca: ca }
+// var privateKey = fs.readFileSync("/etc/letsencrypt/live/haxios.kr/privkey.pem")
+// var certificate = fs.readFileSync("/etc/letsencrypt/live/haxios.kr/cert.pem")
+// var ca = fs.readFileSync("/etc/letsencrypt/live/haxios.kr/chain.pem")
+// const credentials = { key: privateKey, cert: certificate, ca: ca }
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '80');
+const port = normalizePort(process.env.PORT || '5000');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-//var server = http.createServer(app);
+const server = http.createServer(app);
 
-http.createServer(app).listen(80);
-var server = https.createServer(credentials, app).listen(443);
-
+// http.createServer(app).listen(80);
+// var server = https.createServer(credentials, app).listen(443);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-// server.listen(port);
+server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 

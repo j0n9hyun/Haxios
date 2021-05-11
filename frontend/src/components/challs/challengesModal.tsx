@@ -18,6 +18,8 @@ const ChallengeModal = ({
   challPoint,
   challCategory,
   challDesc,
+  challFile,
+  challLink,
 }: any) => {
   const [answer, setAnswer] = useState('');
   const [solved, setSolved] = useRecoilState(solvedState);
@@ -67,6 +69,13 @@ const ChallengeModal = ({
     oneTimeSubmit();
   };
 
+  const onClickFile = (e: any) => {
+    window.open(challFile);
+  };
+  const onClickLink = (e: any) => {
+    window.open(challLink);
+  };
+
   const onClickCloseButton: any = useCallback(() => {
     const closeMotion: any = document.getElementById('close');
     closeMotion?.classList?.add('fadeout');
@@ -105,7 +114,25 @@ const ChallengeModal = ({
                 {challPoint} {challCategory}
               </div>
             </div>
+            <div className='box-wrapper'>
+              {challFile === null ||
+              challFile === undefined ||
+              challFile === '' ? null : (
+                <div className='file-box' onClick={onClickFile}>
+                  파일
+                </div>
+              )}
+              {challLink === null ||
+              challLink === undefined ||
+              challLink === '' ? null : (
+                <div className='link-box' onClick={onClickLink}>
+                  웹 주소
+                </div>
+              )}
+            </div>
+
             <div className='chall-desc'>{challDesc}</div>
+
             <form className='signup-input' onSubmit={onSubmit}>
               <div
                 style={{
