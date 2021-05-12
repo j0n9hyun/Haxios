@@ -242,19 +242,26 @@ body {
     width: 200px;
   }
   display: flex;
-  justify-content: space-around;
   align-items: center;
+  justify-content: space-around;
   position: absolute;
   right: 50px;
-  width: 300px;
   max-width: 100%;
   top: 20px;
+  // width: 400px;
   a {
     text-decoration: none;
     color: #f1f1f1;
     &:hover {
       color: skyblue;
     }
+  }
+  .admin-button {
+    @media screen and(max-width: 768px) {
+      margin-left: 30px;
+    }
+    @extend .login-button;
+    // margin-right: 20px;
   }
   .login-button {
     @media screen and(max-width: 768px) {
@@ -266,9 +273,10 @@ body {
     align-items: center;
     background: #646ca8;
     border-radius: 15px;
-    width: 120px;
+    width: 100px;
     height: 40px;
     color: #f1f1f1;
+    margin-left: 30px;
     font-size: 1em;
     cursor: pointer;
     box-shadow: 3px 3px 30px -13px #000;
@@ -280,12 +288,13 @@ body {
 
   .register-button {
     display: flex;
+    margin-left: 30px;
     cursor: pointer;
     justify-content: center;
     align-items: center;
     background: #646ca8;
     border-radius: 15px;
-    width: 120px;
+    width: 100px;
     height: 40px;
     color: #f1f1f1;
     font-size: 1em;

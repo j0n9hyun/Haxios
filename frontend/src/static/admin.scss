@@ -1,0 +1,96 @@
+@import './common.scss';
+
+.sidebar-wrapper {
+  background: #191f2c;
+  width: 300px;
+  height: 100vh;
+  position: fixed;
+  overflow-y: auto;
+  box-shadow: 3px 3px 30px -13px #000;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #d1d1d1; /*스크롤바의 색상*/
+    background-clip: padding-box;
+    border: 3px solid transparent;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: grey;
+  }
+  animation-name: fadein-motion;
+  animation-duration: 0.5s;
+}
+
+.sidebar-title {
+  margin-top: 15px;
+  color: #f1f1f1;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.sidebar-items {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: #f1f1f1;
+  i {
+    width: 35px;
+    height: 25px;
+    text-align: center;
+  }
+  li {
+    margin-top: 50px;
+    font-size: 1.2rem;
+    list-style: none;
+    margin-left: 85px;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.6;
+      color: #fff;
+      border-radius: 50px;
+      width: 200px;
+      transition: width 0.2s ease-out;
+    }
+  }
+
+  .sidebar-item {
+    padding-left: 10px;
+  }
+}
+
+@keyframes fadein-motion {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.dashboard-wrapper {
+  position: absolute;
+  color: #f1f1f1;
+  left: 330px;
+  background: #191f2c;
+  top: 100px;
+  height: 300px;
+  width: 500px;
+  border-radius: 15px;
+  animation-name: fadein-motion;
+  animation-duration: 0.5s;
+}
+.title-line {
+  border-bottom: 1px solid #f1f1f1;
+  padding-top: 30px;
+}
+
+.logged-users {
+  // border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  // margin-right: 30px;
+}

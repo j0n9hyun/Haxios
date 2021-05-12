@@ -33,8 +33,8 @@ export default function Auth(
       } else {
         setIsLogin(true);
         if (adminRoute && !isAdmin) {
-          history.push('/login');
-          console.log('admin');
+          history.push('/');
+          console.log('only admin');
         } else {
           if (option === false) {
             console.log('option: false');

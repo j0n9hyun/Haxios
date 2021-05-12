@@ -31,7 +31,7 @@ const Navbar = () => {
     });
   };
 
-  const { name, isAuth } = useRecoilValue(authenticationSeletor);
+  const { name, isAuth, isAdmin } = useRecoilValue(authenticationSeletor);
   const history = useHistory<any>();
   return (
     <div>
@@ -40,8 +40,17 @@ const Navbar = () => {
           {name ? `${name}님! 환영합니다.` : ''}
         </div>
       </div>
+
       {isAuth === true ? (
         <div className='login-wrapper'>
+          {isAdmin === true && (
+            <div
+              className='admin-button'
+              onClick={() => history.push('/admin')}
+            >
+              Admin
+            </div>
+          )}
           <div
             className='login-button'
             onClick={() => history.push('/profile')}
@@ -62,6 +71,7 @@ const Navbar = () => {
           </div>
         </div>
       )}
+
       {modalIsOpen && <Register handleModal={handleModal} />}
       {modalIsOpenL && (
         <Login
