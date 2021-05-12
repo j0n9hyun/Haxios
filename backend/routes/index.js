@@ -34,25 +34,33 @@ router.post('/api/users/register', function (req, res) {
 });
 
 router.post('/api/users/login', function (req, res) {
-  User.findOne({ email: req.body.email }, (err, user) => {
-    if (!user) {
-      return res.json({
-        loginSuccess: false,
-        message: '이메일 없음',
+  User.findOneAndUpdate(
+    { email: req.body.email },
+    { last_logged: getCurrentDate() },
+    (err, user) => {
+      if (!user) {
+        return res.json({
+          loginSuccess: false,
+          message: '이메일 없음',
+        });
+      }
+
+      user.comparePassword(req.body.password, (err, isMatch) => {
+        if (!isMatch)
+          return res.json({
+            loginSuccess: false,
+            message: '비밀번호 매치 안됨',
+          });
+        user.generateToken((err, user) => {
+          if (err) return res.status(400).send(err);
+          res
+            .cookie('x_auth', user.token)
+            .status(200)
+            .json({ loginSuccess: true, userId: user._id });
+        });
       });
     }
-    user.comparePassword(req.body.password, (err, isMatch) => {
-      if (!isMatch)
-        return res.json({ loginSuccess: false, message: '비밀번호 매치 안됨' });
-      user.generateToken((err, user) => {
-        if (err) return res.status(400).send(err);
-        res
-          .cookie('x_auth', user.token)
-          .status(200)
-          .json({ loginSuccess: true, userId: user._id });
-      });
-    });
-  });
+  );
 });
 
 router.post('/api/users/auth', auth, (req, res) => {
@@ -67,6 +75,7 @@ router.post('/api/users/auth', auth, (req, res) => {
     solved: req.user.solved,
     totalPoint: req.user.totalPoint,
     last_updated: req.user.last_updated,
+    last_logged: req.user.last_logged,
   });
 });
 
@@ -160,6 +169,17 @@ router.post('/api/users/list', auth, (req, res) => {
     {},
     '_id name totalPoint last_updated',
     { sort: { totalPoint: -1, last_updated: 1 } },
+    function (err, cb) {
+      res.status(200).json(cb);
+    }
+  );
+});
+
+router.post('/api/users/logged', auth, (req, res) => {
+  User.find(
+    {},
+    '_id name totalPoint last_updated last_logged',
+    { sort: { last_logged: -1 } },
     function (err, cb) {
       res.status(200).json(cb);
     }

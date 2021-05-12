@@ -80,6 +80,10 @@ export const solvedState = atom({
   default: [''],
 })
 
+export const loggedState = atom({
+  key: 'loggedState',
+  default: [],
+})
 // export const 해결된_문제_상태 = atom({
 //   key: '해결된_문제_상태',
 //   default: false,
@@ -172,5 +176,9 @@ export const userListsSelector = selector({
 
 export async function userListsState() {
   const response: any = await axios.post('api/users/list');
+  return response.data;
+} 
+export async function userLoggedState() {
+  const response: any = await axios.post('api/users/logged');
   return response.data;
 } 
