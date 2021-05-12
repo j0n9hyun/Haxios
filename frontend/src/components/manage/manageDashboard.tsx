@@ -5,10 +5,7 @@ import { loggedState, userLoggedState } from '../atoms/authState';
 const ManageDashboard = () => {
   const [log, setLog] = useRecoilState(loggedState);
   useEffect(() => {
-    const call = async () => {
-      await userLoggedState().then((res: any) => setLog(res));
-    };
-    call();
+    userLoggedState().then((res: any) => setLog(res));
   }, [setLog]);
   return (
     <div>

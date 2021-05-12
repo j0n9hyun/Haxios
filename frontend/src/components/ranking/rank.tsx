@@ -4,6 +4,7 @@ import Menu from '../menu';
 import '../../static/rank.scss';
 import RankUsers from './rankUsers';
 import Loading from '../hoc/loading';
+import { withRouter } from 'react-router';
 
 const Rank = () => {
   return (
@@ -21,4 +22,4 @@ const Rank = () => {
   );
 };
 
-export default Rank;
+export default withRouter(Rank);

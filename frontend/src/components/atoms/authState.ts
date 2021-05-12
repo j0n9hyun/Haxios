@@ -181,4 +181,4 @@ export async function userListsState() {
 export async function userLoggedState() {
   const response: any = await axios.post('api/users/logged');
   return response.data;
-} 
+}

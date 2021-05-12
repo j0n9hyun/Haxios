@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import ManageDashboard from './manageDashboard';
 import ManageMenu from './manageMenu';
 
@@ -11,4 +12,4 @@ const Management = () => {
   );
 };
 
-export default Management;
+export default withRouter(Management);

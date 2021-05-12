@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { withRouter } from 'react-router';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import '../../static/filtering.scss';
 import { challengesSelector, challsListState } from '../atoms/authState';
@@ -83,4 +84,4 @@ const ChallengesFiltering = () => {
   );
 };
 
-export default ChallengesFiltering;
+export default withRouter(ChallengesFiltering);

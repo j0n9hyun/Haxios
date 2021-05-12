@@ -7,14 +7,11 @@ const RankUsers = () => {
   const userId = useRecoilValue(authenticationSeletor);
   const [유저목록, 유저목록_설정] = useState<any>([]);
   useEffect(() => {
-    const call = async () => {
-      await userListsState()
-        ?.then((res: any) =>
-          유저목록_설정(res?.filter((v: any) => v.totalPoint !== 0))
-        )
-        .catch((e: any) => e);
-    };
-    call();
+    userListsState()
+      ?.then((res: any) =>
+        유저목록_설정(res?.filter((v: any) => v.totalPoint !== 0))
+      )
+      .catch((e: any) => e);
   }, []);
 
   return (
