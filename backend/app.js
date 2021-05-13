@@ -9,7 +9,9 @@ const mongoose = require('mongoose');
 const config = require('./config/key');
 const cors = require('cors');
 const app = express();
-
+// const csrf = require('csurf');
+// const csrfProtection = csrf({ cookie: true });
+app.set('x-powered-by', false);
 mongoose
   .connect(config.mongoURI, {
     useUnifiedTopology: true,
@@ -31,6 +33,7 @@ app.set('view engine', 'pug');
 //     next();
 //   }
 // });
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

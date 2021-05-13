@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../../static/home.scss';
 import { withRouter } from 'react-router-dom';
 import {
@@ -8,8 +8,10 @@ import {
   pwState,
   Reset,
   submitState,
+  tokenState,
+  csrfTokenSelector,
 } from '../atoms/authState';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import title from '../../static/title.svg';
 
 const Login = ({ handleModalLogin }: any) => {
@@ -17,9 +19,13 @@ const Login = ({ handleModalLogin }: any) => {
   const [pw, setPw] = useRecoilState(pwState);
   const [modalIsOpen, setModalIsOpen] = useRecoilState(modalState);
   const [modalIsOpenL, setModalIsOpenL] = useRecoilState(modalLState);
+  const [csrfToken, setCsrfToken] = useRecoilState(tokenState);
+  // const [csrfToken, setCsrfToken] = useState('');
+  const token = useRecoilValue(csrfTokenSelector);
 
   const { resetId, resetPw } = Reset();
   const ref = useRef<any>();
+
   const onChangeId = (e: any) => {
     setId(e.currentTarget.value);
   };
@@ -30,15 +36,21 @@ const Login = ({ handleModalLogin }: any) => {
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    try {
-      await submitState(id, pw).then((res) => {
-        resetId();
-        resetPw();
-        res.loginSuccess ? window.location.reload() : ref.current.focus();
-      });
-    } catch {
-      console.log('err');
-    }
+    submitState(id, pw, csrfToken).then((res) => {
+      resetId();
+      resetPw();
+      res.loginSuccess ? window.location.reload() : ref.current.focus();
+    });
+
+    // try {
+    //   submitState(id, pw, csrfToken).then((res) => {
+    //     resetId();
+    //     resetPw();
+    //     res.loginSuccess ? window.location.reload() : ref.current.focus();
+    //   });
+    // } catch {
+    //   console.log('err');
+    // }
   };
 
   const onClickRegister = () => {
@@ -48,6 +60,8 @@ const Login = ({ handleModalLogin }: any) => {
 
   useEffect(() => {
     ref.current.focus();
+    setCsrfToken(token);
+    // csrfTokenState().then((res: any) => setCsrfToken(res.csrfToken));
   }, []);
 
   return (
@@ -66,6 +80,7 @@ const Login = ({ handleModalLogin }: any) => {
               <div className='signup-header-subtitle'>로그인 페이지</div>
             </div>
             <form className='signup-input' onSubmit={onSubmit}>
+              {/* <input type='hidden' name='_csrf' value={csrfToken} /> */}
               <div className='signup-input-text'>ID</div>
               <div className='signup-input id'>
                 <input

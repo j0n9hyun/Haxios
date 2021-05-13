@@ -2,8 +2,15 @@ import React, { useState, useRef, useEffect } from 'react';
 import '../../static/home.scss';
 import { withRouter } from 'react-router-dom';
 import title from '../../static/title.svg';
-import { modalLState, modalState, registerState } from '../atoms/authState';
-import { useRecoilState } from 'recoil';
+import {
+  csrfTokenSelector,
+  csrfTokenState,
+  modalLState,
+  modalState,
+  registerState,
+  tokenState,
+} from '../atoms/authState';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 const Register = ({ handleModal }: any) => {
   const [id, setId] = useState('');
@@ -15,6 +22,8 @@ const Register = ({ handleModal }: any) => {
 
   const [modalIsOpen, setModalIsOpen] = useRecoilState(modalState);
   const [modalIsOpenL, setModalIsOpenL] = useRecoilState(modalLState);
+  const [csrfToken, setCsrfToken] = useRecoilState(tokenState);
+  const token = useRecoilValue(csrfTokenSelector);
 
   const onChangeId = (e: any) => {
     setId(e.currentTarget.value);
@@ -41,10 +50,9 @@ const Register = ({ handleModal }: any) => {
       return false;
     }
     const call = async () => {
-      registerState(id, pw, name)
+      registerState(id, pw, name, csrfToken)
         .then((res) => {
           if (res.success) {
-            // history.push('/login');
             setModalIsOpen(!modalIsOpen);
             setModalIsOpenL(!modalIsOpenL);
           } else {
@@ -63,6 +71,7 @@ const Register = ({ handleModal }: any) => {
 
   useEffect(() => {
     ref.current.focus();
+    setCsrfToken(token);
   }, []);
 
   return (

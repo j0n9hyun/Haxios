@@ -84,6 +84,10 @@ export const loggedState = atom({
   key: 'loggedState',
   default: [],
 })
+export const tokenState = atom({
+  key: 'tokenState',
+  default: '',
+})
 // export const 해결된_문제_상태 = atom({
 //   key: '해결된_문제_상태',
 //   default: false,
@@ -103,11 +107,14 @@ export function Reset() {
     resetPw,
   };
 }
-
-export async function submitState(id: any, pw: any) {
+export async function submitState(id: any, pw: any, csrfToken: any) {
   const response: any = await axios.post('api/users/login', {
     email: id,
     password: pw,
+  }, {
+    headers: {
+      "xsrf-token": csrfToken,
+    },
   });
   return response.data;
 }
@@ -117,11 +124,15 @@ export async function logoutState() {
   return response.data;
 }
 
-export async function registerState(id: string, pw: string, name: string) {
+export async function registerState(id: string, pw: string, name: string, csrfToken: string) {
   const response: any = await axios.post('api/users/register', {
     email: id,
     password: pw,
     name: name,
+  }, {
+    headers: {
+      "xsrf-token": csrfToken,
+    },
   });
   return response.data;
 }
@@ -182,3 +193,16 @@ export async function userLoggedState() {
   const response: any = await axios.post('api/users/logged');
   return response.data;
 }
+
+export async function csrfTokenState() {
+  const response: any = await axios.get('api/token');
+  return response.data;
+}
+
+export const csrfTokenSelector = selector({
+  key: 'csrfTokenSelector',
+  get: async() => {
+    const response: any = await axios.get('api/token');
+    return response.data;
+  }
+})

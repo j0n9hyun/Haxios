@@ -6,6 +6,10 @@ const { Challenges } = require('../models/Challenges');
 const { auth } = require('../middleware/auth');
 const { json } = require('express');
 const path = require('path');
+const csrf = require('csurf');
+
+const csrfProtection = csrf({ cookie: true });
+
 function getCurrentDate() {
   var date = new Date();
   var year = date.getFullYear();
@@ -20,20 +24,25 @@ function getCurrentDate() {
   );
 }
 
-router.get('/', function (req, res) {
-  res.status(200).send('ㅎㅇ');
+router.get('/api/token', csrfProtection, function (req, res) {
+  // res.cookie('csrfToken', req.csrfToken(), {
+  //   httpOnly: true,
+  //   // expires: new Date(Date.now() + 3 * 3600000), // 3시간 동안 유효
+  // });
+  res.json(req.csrfToken());
 });
 
-router.post('/api/users/register', function (req, res) {
+router.post('/api/users/register', csrfProtection, function (req, res) {
   const user = new User(req.body);
+
   user.save((err, uesrInfo) => {
     if (err) return res.json({ success: false, err });
     return res.status(200).json({ success: true });
   });
-  console.log(user);
 });
 
-router.post('/api/users/login', function (req, res) {
+router.post('/api/users/login', csrfProtection, function (req, res) {
+  // console.log(req.headers);
   User.findOneAndUpdate(
     { email: req.body.email },
     { last_logged: getCurrentDate() },
@@ -54,7 +63,10 @@ router.post('/api/users/login', function (req, res) {
         user.generateToken((err, user) => {
           if (err) return res.status(400).send(err);
           res
-            .cookie('x_auth', user.token)
+            .cookie('x_auth', user.token, {
+              httpOnly: true,
+              secure: true,
+            })
             .status(200)
             .json({ loginSuccess: true, userId: user._id });
         });
@@ -88,19 +100,15 @@ router.get('/api/users/logout', auth, (req, res) => {
   });
 });
 
-router.post('/api/users/challs', auth, (req, res) => {
+router.post('/api/users/challs', auth, csrfProtection, (req, res) => {
   const challs = new Challenges(req.body);
   if (res.status(200).json({ success: true })) {
     challs.save();
   }
-  // console.log(challs);
 });
 
 router.get('/api/users/challs', auth, (req, res) => {
   const challs = new Challenges(req.body);
-  // console.log(challs);
-  // Challenges.find((v) => v.id);
-  // const todo = challs.find((todo) => todo.id == req.params.id);
   Challenges.find(
     {},
     'title category description point solves file link',
