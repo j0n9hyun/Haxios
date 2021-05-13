@@ -5,10 +5,13 @@ import '../../static/rank.scss';
 import RankUsers from './rankUsers';
 import Loading from '../hoc/loading';
 import { withRouter } from 'react-router';
-
+import { Helmet } from 'react-helmet-async';
 const Rank = () => {
   return (
     <>
+      <Helmet>
+        <title>Haxios - Ranking</title>
+      </Helmet>
       <Menu />
       <Navbar />
       <div className='rank-wrapper'>

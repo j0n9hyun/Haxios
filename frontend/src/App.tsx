@@ -8,6 +8,7 @@ import Profile from './components/profile/profile';
 import Rank from './components/ranking/rank';
 import Challenges from './components/challs/challenges';
 import Management from './components/manage';
+import { HelmetProvider } from 'react-helmet-async';
 
 function App() {
   return (
@@ -15,11 +16,14 @@ function App() {
       <Switch>
         <RecoilRoot>
           <Suspense fallback={<Loading />}>
-            <Route path='/' exact component={Auth(Home, null)} />
-            <Route path='/profile' exact component={Auth(Profile, true)} />
-            <Route path='/rank' exact component={Auth(Rank, true)} />
-            <Route path='/challs' exact component={Auth(Challenges, true)} />
-            <Route path='/admin' exact component={Auth(Management, true, 1)} />
+            <HelmetProvider>
+              <Route path='/' exact component={Auth(Home, null)} />
+              <Route path='/profile' component={Auth(Profile, true)} />
+              <Route path='/rank' component={Auth(Rank, true)} />
+              <Route path='/challs' component={Auth(Challenges, true)} />
+              <Route path='/admin' component={Auth(Management, true, 1)} />
+              {/* <Route component={Page404} /> */}
+            </HelmetProvider>
           </Suspense>
         </RecoilRoot>
       </Switch>
