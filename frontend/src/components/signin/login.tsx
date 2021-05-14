@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import '../../static/home.scss';
 import { withRouter } from 'react-router-dom';
 import {
@@ -20,7 +20,6 @@ const Login = ({ handleModalLogin }: any) => {
   const [modalIsOpen, setModalIsOpen] = useRecoilState(modalState);
   const [modalIsOpenL, setModalIsOpenL] = useRecoilState(modalLState);
   const [csrfToken, setCsrfToken] = useRecoilState(tokenState);
-  // const [csrfToken, setCsrfToken] = useState('');
   const token = useRecoilValue(csrfTokenSelector);
 
   const { resetId, resetPw } = Reset();
@@ -41,16 +40,6 @@ const Login = ({ handleModalLogin }: any) => {
       resetPw();
       res.loginSuccess ? window.location.reload() : ref.current.focus();
     });
-
-    // try {
-    //   submitState(id, pw, csrfToken).then((res) => {
-    //     resetId();
-    //     resetPw();
-    //     res.loginSuccess ? window.location.reload() : ref.current.focus();
-    //   });
-    // } catch {
-    //   console.log('err');
-    // }
   };
 
   const onClickRegister = () => {
@@ -61,8 +50,7 @@ const Login = ({ handleModalLogin }: any) => {
   useEffect(() => {
     ref.current.focus();
     setCsrfToken(token);
-    // csrfTokenState().then((res: any) => setCsrfToken(res.csrfToken));
-  }, []);
+  }, [setCsrfToken, token]);
 
   return (
     <>

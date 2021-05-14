@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 import title from '../../static/title.svg';
 import {
   csrfTokenSelector,
-  csrfTokenState,
   modalLState,
   modalState,
   registerState,
@@ -49,19 +48,16 @@ const Register = ({ handleModal }: any) => {
       // ref.current.style.border = '2px solid #ff6b6b';
       return false;
     }
-    const call = async () => {
-      registerState(id, pw, name, csrfToken)
-        .then((res) => {
-          if (res.success) {
-            setModalIsOpen(!modalIsOpen);
-            setModalIsOpenL(!modalIsOpenL);
-          } else {
-            console.log('회원가입 실패');
-          }
-        })
-        .catch((err) => console.log(err));
-    };
-    call();
+    registerState(id, pw, name, csrfToken)
+      .then((res) => {
+        if (res.success) {
+          setModalIsOpen(!modalIsOpen);
+          setModalIsOpenL(!modalIsOpenL);
+        } else {
+          console.log('회원가입 실패');
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   const onClickLogin = () => {
@@ -72,7 +68,7 @@ const Register = ({ handleModal }: any) => {
   useEffect(() => {
     ref.current.focus();
     setCsrfToken(token);
-  }, []);
+  }, [setCsrfToken, token]);
 
   return (
     <>

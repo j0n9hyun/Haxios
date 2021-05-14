@@ -8,8 +8,9 @@ const { json } = require('express');
 const path = require('path');
 const csrf = require('csurf');
 
-const csrfProtection = csrf({ cookie: true });
-
+const csrfProtection = csrf({
+  cookie: true,
+});
 function getCurrentDate() {
   var date = new Date();
   var year = date.getFullYear();
@@ -25,11 +26,8 @@ function getCurrentDate() {
 }
 
 router.get('/api/token', csrfProtection, function (req, res) {
-  // res.cookie('csrfToken', req.csrfToken(), {
-  //   httpOnly: true,
-  //   // expires: new Date(Date.now() + 3 * 3600000), // 3시간 동안 유효
-  // });
-  res.json(req.csrfToken());
+  let token = req.csrfToken();
+  res.json(token);
 });
 
 router.post('/api/users/register', csrfProtection, function (req, res) {
@@ -42,7 +40,6 @@ router.post('/api/users/register', csrfProtection, function (req, res) {
 });
 
 router.post('/api/users/login', csrfProtection, function (req, res) {
-  // console.log(req.headers);
   User.findOneAndUpdate(
     { email: req.body.email },
     { last_logged: getCurrentDate() },
@@ -131,7 +128,7 @@ router.patch('/api/users/challs/:_id', auth, (req, res) => {
       if (!err) {
         res.status(200).json({ isSolved: true });
       } else {
-        res.send('실패스');
+        res.send('failed');
       }
     }
   );
