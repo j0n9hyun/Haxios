@@ -88,10 +88,6 @@ export const tokenState = atom({
   key: 'tokenState',
   default: '',
 })
-// export const 해결된_문제_상태 = atom({
-//   key: '해결된_문제_상태',
-//   default: false,
-// })
 
 export type RegisterProps = {
   id: string;

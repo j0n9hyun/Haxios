@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 const config = require('./config/key');
 const cors = require('cors');
 const app = express();
+
 app.set('x-powered-by', false);
 mongoose
   .connect(config.mongoURI, {
@@ -39,7 +40,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use(express.static(path.join(__dirname, '../frontend/build')));
-app.use(cors({ origin: 'https://haxios.kr' }));
+// app.use(cors({ origin: 'https://haxios.kr' }));
+app.use(cors());
 app.use('/', indexRouter);
 
 app.use(function (req, res, next) {

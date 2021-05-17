@@ -13,7 +13,6 @@ const RankUsers = () => {
       )
       .catch((e: any) => e);
   }, []);
-
   return (
     <>
       <RankTrophy 유저목록={유저목록} />

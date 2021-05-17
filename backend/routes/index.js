@@ -9,7 +9,7 @@ const path = require('path');
 const csrf = require('csurf');
 
 const csrfProtection = csrf({
-  cookie: true,
+  cookie: { key: 'visitor', httpOnly: true, secure: true },
 });
 function getCurrentDate() {
   var date = new Date();
@@ -24,6 +24,10 @@ function getCurrentDate() {
     Date.UTC(year, month, today, hours, minutes, seconds, milliseconds)
   );
 }
+
+router.get('/', function (req, res) {
+  res.send('aaa');
+});
 
 router.get('/api/token', csrfProtection, function (req, res) {
   let token = req.csrfToken();

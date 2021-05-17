@@ -10,6 +10,7 @@ import {
 } from '../atoms/authState';
 import axios from 'axios';
 import ChallengesEffect from './challengesEffect';
+import { io } from 'socket.io-client';
 
 const ChallengeModal = ({
   handleModal,
@@ -53,6 +54,11 @@ const ChallengeModal = ({
       })
       .then((res: any) => {
         if (res.data.success) {
+          const socket = io();
+          socket.emit('init', { name: userId.totalPoint + challPoint });
+          socket.on('welcome', (msg: any) => {
+            console.log(msg);
+          });
           setSolved(solved.concat(challId));
           setFirwork(true);
         } else {
