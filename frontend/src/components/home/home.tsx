@@ -6,6 +6,7 @@ import Menu from '../menu';
 import Loading from '../hoc/loading';
 import Rules from './rules';
 import { Helmet } from 'react-helmet-async';
+import Competition from '../competition';
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
         <Navbar />
         <Rules />
       </Suspense>
+      <Competition />
     </>
   );
 };

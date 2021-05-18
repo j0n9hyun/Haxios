@@ -10,7 +10,6 @@ import {
 } from '../atoms/authState';
 import axios from 'axios';
 import ChallengesEffect from './challengesEffect';
-import { io } from 'socket.io-client';
 
 const ChallengeModal = ({
   handleModal,
@@ -28,7 +27,6 @@ const ChallengeModal = ({
   const userId = useRecoilValue(authenticationSeletor);
   const [firework, setFirwork] = useState(false);
   const ref = useRef<any>();
-
   const [중복제출, 중복제출_설정] = useState<any>(false);
 
   let isSubmitted = false;
@@ -54,11 +52,12 @@ const ChallengeModal = ({
       })
       .then((res: any) => {
         if (res.data.success) {
-          const socket = io();
-          socket.emit('init', { name: userId.totalPoint + challPoint });
-          socket.on('welcome', (msg: any) => {
-            console.log(msg);
-          });
+          // const socket = io();
+
+          // socket.emit('init', { name: challPoint });
+          // socket.on('welcome', (msg: any) => {
+          //   console.log(msg);
+          // });
           setSolved(solved.concat(challId));
           setFirwork(true);
         } else {
