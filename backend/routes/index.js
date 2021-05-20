@@ -195,8 +195,8 @@ router.post('/api/users/logged', auth, (req, res) => {
   );
 });
 
-// router.get('/*', function (req, res) {
-//   res.sendFile(path.join(__dirname, '../../frontend/build/index.html'));
-// });
+router.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, '../../frontend/build/index.html'));
+});
 
 module.exports = router;
