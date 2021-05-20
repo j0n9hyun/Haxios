@@ -1,35 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { io } from 'socket.io-client';
 import $ from 'jquery';
 
 const socket: any = io();
 const Competition = () => {
   // const [currentSocket, setCurrentSocket] = useState();
-  const [msg, setMsg] = useState('');
-  const [view, setView] = useState('');
-  const [localView, setLocalView] = useState('');
-  const [test, setTest] = useState('');
-  const [name, setName] = useState('');
+  const [msg, setMsg] = useState<any>('');
+
   useEffect(() => {
+    setMsg('');
     socket.on('new_connect', function (name: string) {
-      setName(name);
-      $('#chat').append('<알림> ' + name + '님이 채팅창에 접속했습니다.\n');
+      $('#chatLog').append(
+        '<알림> ' + name + '님이 채팅창에 접속했습니다. <br />'
+      );
     });
     socket.on('new_disconnect', function (name: string) {
-      $('#chat').append('<알림> ' + name + '님이 채팅창을 떠났습니다.\n');
+      $('#chatLog').append(
+        '<알림> ' + name + '님이 채팅창을 떠났습니다. <br />'
+      );
+    });
+    socket.on('receive message', function (msg: any) {
+      console.log(msg.name);
+      $('#chatLog').append(msg + '<br />');
+      $('#chatLog').scrollTop($('#chatLog')[0].scrollHeight);
     });
   }, []);
 
   const onSubmit = (e: any) => {
-    socket.emit('send message', msg);
-    // socket.on('receive message', function (v: string) {
-    //   $('#chat').append(msg);
-    // });
-    socket.on('receive message', function (v: string) {
-      setTest(msg);
-    });
-    setMsg('');
+    socket.emit('send message', { msg });
     e.preventDefault();
+    setMsg('');
   };
 
   const onChange = (e: any) => {
@@ -40,35 +40,27 @@ const Competition = () => {
     <div
       style={{
         color: '#f1f1f1',
-        width: '500px',
-        height: '300px',
+        width: '400px',
+        height: '500px',
         position: 'absolute',
-        right: '0',
+        top: '80px',
+        right: '100px',
         background: '#191f2c',
         fontSize: '1rem',
-        alignContent: 'flex-end',
+        wordBreak: 'break-word',
+        borderRadius: '15px',
       }}
     >
+      <div
+        id='chatLog'
+        style={{
+          height: '500px',
+          overflowY: 'auto',
+        }}
+      ></div>
       <form id='chat' onSubmit={onSubmit}>
-        {test}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '0',
-            outline: 'none',
-            width: '100%',
-            // border: '1px solid red',
-          }}
-        >
-          <input
-            type='text'
-            onChange={onChange}
-            value={msg}
-            style={{ width: '70%' }}
-            id='message'
-          />
-          <button type='submit'>전송</button>
-        </div>
+        <input type='text' onChange={onChange} value={msg} id='message' />
+        <button type='submit'>전송</button>
       </form>
     </div>
   );

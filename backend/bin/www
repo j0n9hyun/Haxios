@@ -73,12 +73,11 @@ io.on('connection', function (socket) {
     io.emit('new_disconnect', socket.name);
   });
 
-  socket.on('send message', function (name, text) {
-    let msg = name + ' : ' + text;
-    // let msg = name;
+  socket.on('send message', function (text) {
+    console.log(`${name} : ${text.msg}`);
+    let msg = name + ' : ' + text.msg;
     if (name != socket.name) io.emit('change name', socket.name, name);
     socket.name = name;
-    console.log(msg);
     io.emit('receive message', msg);
   });
 });
