@@ -4897,6 +4897,7 @@ readers do not read off random characters that represent icons */
 
 .fa-spinner:before {
   content: '\f110';
+  color: #f1f1f1;
 }
 
 .fa-splotch:before {

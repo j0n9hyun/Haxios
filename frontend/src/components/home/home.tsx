@@ -18,8 +18,8 @@ const Home = () => {
         <Menu />
         <Navbar />
         <Rules />
+        <Competition />
       </Suspense>
-      <Competition />
     </>
   );
 };
