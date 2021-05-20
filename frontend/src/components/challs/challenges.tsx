@@ -15,10 +15,8 @@ const Challenges = (props: any) => {
       </Helmet>
       <Menu />
       <Navbar />
-      <Suspense fallback={<Loading />}>
-        <ChallengesFiltering />
-        <ChallengeProbs />
-      </Suspense>
+      <ChallengesFiltering />
+      <ChallengeProbs />
     </>
   );
 };
