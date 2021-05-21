@@ -52,12 +52,6 @@ const ChallengeModal = ({
       })
       .then((res: any) => {
         if (res.data.success) {
-          // const socket = io();
-
-          // socket.emit('init', { name: challPoint });
-          // socket.on('welcome', (msg: any) => {
-          //   console.log(msg);
-          // });
           setSolved(solved.concat(challId));
           setFirwork(true);
         } else {
