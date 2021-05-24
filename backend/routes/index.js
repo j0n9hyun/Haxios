@@ -60,7 +60,7 @@ router.post('/api/users/login', csrfProtection, function (req, res) {
         user.generateToken((err, user) => {
           if (err) return res.status(400).send(err);
           res
-            .cookie('x_auth', user.token, {
+            .cookie('auth', user.token, {
               httpOnly: true,
               secure: true,
             })
@@ -109,7 +109,6 @@ router.get('/api/users/challs', auth, (req, res) => {
   Challenges.find(
     {},
     'title category description point solves file link',
-
     function (err, cb) {
       if (!err) {
         res.status(200).send(cb);
