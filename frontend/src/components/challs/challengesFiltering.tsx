@@ -7,7 +7,7 @@ const ChallengesFiltering = () => {
   const setChallsList = useSetRecoilState(challsListState);
   const checkedChalls = useRecoilValue(challengesSelector);
   const [active, setActive] = useState(0);
-  // const setChallsList = useSetRecoilState(challsListState);
+
   const onClick = (e: any) => {
     if (e.target.innerHTML === 'Pwn') {
       setChallsList(checkedChalls.filter((v: any) => v.category === 'Pwn'));
