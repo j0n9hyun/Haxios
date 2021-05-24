@@ -9,7 +9,6 @@ const mongoose = require('mongoose');
 const config = require('./config/key');
 const cors = require('cors');
 const app = express();
-
 app.set('x-powered-by', false);
 mongoose
   .connect(config.mongoURI, {
