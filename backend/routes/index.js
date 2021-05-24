@@ -25,10 +25,6 @@ function getCurrentDate() {
   );
 }
 
-router.get('/', function (req, res) {
-  res.send('aaa');
-});
-
 router.get('/api/token', csrfProtection, function (req, res) {
   let token = req.csrfToken();
   res.json(token);
